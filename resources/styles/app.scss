@@ -1,0 +1,33 @@
+@import 'variables';
+@import 'typography';
+
+@import 'components/menu-draw';
+@import 'components/navbar';
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    cursor: pointer; // Bootstrap does something funny with this
+}
+
+.main-container {
+    width: calc(100% - #{$menu-draw-width});
+    margin-left: $menu-draw-width;
+    margin-top: 50px;
+    transition: $menu-draw-transition;
+
+    .menu-draw-collpased & {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+.panel {
+    border-radius: 0;
+}
+
+.main-content {
+    padding: 30px
+}
