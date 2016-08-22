@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Resource;
 use App\PaperInstance;
 
 class Paper extends Model
@@ -16,23 +15,9 @@ class Paper extends Model
     /**
      * Relationships
      */
-    public function resources()
-    {
-        return $this->hasMany(Resource::class);
-    }
-
     public function instances()
     {
         return $this->hasMany(PaperInstance::class);
-    }
-
-    /**
-     * Creates a new resource for this paper
-     */
-    public function createResource($data)
-    {
-        $data['paper_id'] = $this->id;
-        return Resource::create($data);
     }
 
     /**

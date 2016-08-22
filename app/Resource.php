@@ -8,11 +8,14 @@ use App\PaperInstance;
 class Resource extends Model
 {
     protected $fillable = [
-        'paper_id',
+        'paper_instance_id',
         'name',
         'url',
     ];
 
+    /**
+     * Relationships
+     */
     public function paper()
     {
         return $this->belongsTo(PaperInstance::class);

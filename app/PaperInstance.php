@@ -3,9 +3,10 @@
 namespace App;
 
 use App\DateBlock;
+use App\Group;
 use App\Paper;
-use App\Stream;
 use App\User;
+use App\Resource;
 use Illuminate\Database\Eloquent\Model;
 
 class PaperInstance extends Model
@@ -13,7 +14,16 @@ class PaperInstance extends Model
     protected $fillable = [
         'paper_id',
         'date_block_id',
+        'lecturer_group_id',
     ];
+
+    /**
+     * Relationships
+     */
+    public function resources()
+    {
+        return $this->hasMany(Resource::class);
+    }
 
     public function paper()
     {
@@ -23,5 +33,24 @@ class PaperInstance extends Model
     public function dateBlock()
     {
         return $this->belongsTo(DateBlock::class);
+    }
+
+    public function lecturersGroup()
+    {
+        return $this->hasOne(Group::class, 'id', 'lecturer_group_id');
+    }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class)->where('id', '!=', 'lecturer_group_id');
+    }
+
+    /**
+     * Creates a new resource for this paper
+     */
+    public function createResource($data)
+    {
+        $data['paper_id'] = $this->id;
+        return Resource::create($data);
     }
 }

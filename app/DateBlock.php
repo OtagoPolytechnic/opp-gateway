@@ -18,6 +18,9 @@ class DateBlock extends Model
         'end_date',
     ];
 
+    /**
+     * Relationships
+     */
     public function paperInstances()
     {
         return $this->hasMany(PaperInstance::class);

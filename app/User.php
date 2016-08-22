@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Group;
 use App\PaperInstance;
-use App\Stream;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -18,4 +18,17 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * Relationships
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }
