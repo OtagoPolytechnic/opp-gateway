@@ -42,7 +42,7 @@ class PaperInstance extends Model
 
     public function groups()
     {
-        return $this->hasMany(Group::class)->where('id', '!=', 'lecturer_group_id');
+        return $this->hasMany(Group::class);
     }
 
     /**
@@ -50,7 +50,7 @@ class PaperInstance extends Model
      */
     public function createResource($data)
     {
-        $data['paper_id'] = $this->id;
+        $data['paper_instance_id'] = $this->id;
         return Resource::create($data);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Prep the DB for seeding
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Model::unguard(); // Temporally disable the mass-assignment protection of models
+
         $this->call(PaperSeeder::class);
+
+        // Set the DB back to normal
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Model::reguard();
     }
 }

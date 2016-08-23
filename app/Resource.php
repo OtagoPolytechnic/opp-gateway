@@ -16,7 +16,7 @@ class Resource extends Model
     /**
      * Relationships
      */
-    public function paper()
+    public function paperInstance()
     {
         return $this->belongsTo(PaperInstance::class);
     }

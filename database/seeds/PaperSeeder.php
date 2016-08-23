@@ -12,6 +12,9 @@ class PaperSeeder extends Seeder
      */
     public function run()
     {
+        // Clear the papers table
+        Paper::truncate();
+
         // First year seeds
         Paper::create(['code' => 'IN511', 'name' => 'Programming 1']);
         Paper::create(['code' => 'IN512', 'name' => 'PC Maintenance']);

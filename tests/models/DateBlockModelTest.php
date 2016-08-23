@@ -3,12 +3,9 @@
 use App\DateBlock;
 use App\Paper;
 use App\PaperInstance;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DateBlockModelTest extends TestCase
 {
-    use DatabaseTransactions;
-
     /**
      * @test
      */

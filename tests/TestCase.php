@@ -1,7 +1,12 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
+    // This makes every test run within a transaction (so it is not committed to the database)
+    use DatabaseTransactions;
+    
     /**
      * The base URL to use while testing the application.
      *

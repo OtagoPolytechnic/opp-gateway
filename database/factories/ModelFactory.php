@@ -57,3 +57,32 @@ $factory->define(App\DateBlock::class, function (Generator $faker) {
         'end_date' => $endDate,
     ];
 });
+
+$factory->define(App\PaperInstance::class, function (Generator $faker) {
+    $paper = factory(App\Paper::class)->create();
+    $dateBlock = factory(App\DateBlock::class)->create();
+
+    return [
+        'paper_id' => $paper->id,
+        'date_block_id' => $dateBlock->id,
+    ];
+});
+
+$factory->define(App\Group::class, function (Generator $faker) {
+    $paperInstance = factory(App\PaperInstance::class)->create();
+    $name = $faker->words($faker->numberBetween(1, 4), true);
+
+    return [
+        'paper_instance_id' => $paperInstance->id,
+        'name' => $name,
+        'hidden' => false,
+    ];
+});
+
+$factory->define(App\Role::class, function (Generator $faker) {
+    $name = $faker->words($faker->numberBetween(1, 4), true);
+
+    return [
+        'name' => $name,
+    ];
+});

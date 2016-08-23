@@ -30,6 +30,22 @@ class Group extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Check if this group has a particular role
+     */
+    public function hasRole($role)
+    {
+        // Find the number of times that role's id appears in the group->roles
+        $countRoles = $this->roles()->where('role_id', $role->id)->count();
+
+        // If the number returned is greater than one, this group has that role
+        if ($countRoles > 0)
+            return true;
+
+        // Role not found
+        return false;
     }
 }

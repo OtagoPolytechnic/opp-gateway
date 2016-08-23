@@ -1,23 +1,20 @@
 <?php
 
-use App\Paper;
+use App\PaperInstance;
 use App\Resource;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ResourceModelTest extends TestCase
 {
-    use DatabaseTransactions;
-    
     /**
      * @test
      */
-    public function relationship_paper()
+    public function relationship_paperInstance()
     {
-        $paper = factory(Paper::class)->create();
-        $resource = factory(Resource::class)->create(['paper_id' => $paper->id]);
+        $paperInstance = factory(PaperInstance::class)->create();
+        $resource = factory(Resource::class)->create(['paper_instance_id' => $paperInstance->id]);
 
-        $expected = $paper->id;
-        $actual = $resource->paper->id;
+        $expected = $paperInstance->id;
+        $actual = $resource->paperInstance->id;
 
         $this->assertEquals($expected, $actual);
     }
