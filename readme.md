@@ -3,12 +3,12 @@
 ## Install
 
 1. Clone repo
-2. Run `composer install`
-3. Copy `.env.example` to `.env` and fill in the blanks
-4. Run `artisan key:generate`
-5. Run `artisan migrate --seed`
-6. Run `npm install`
-7. Run `gulp`
+2. Install composer dependencies `composer install`
+3. Setup the enviroment variables: copy `.env.example` to `.env` and fill in the blanks
+4. Generate a key `artisan key:generate`
+5. Seed the database `artisan migrate --seed`
+6. Install node dependencies `npm install`
+7. Compile React & SCSS `gulp`
 
 
 ## Requirements
