@@ -4,7 +4,7 @@ namespace App;
 
 use App\Paper;
 use App\PaperInstance;
-use App\Roles;
+use App\Role;
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
@@ -16,27 +16,42 @@ class Group extends Model
     ];
 
     /**
-     * Relationships
+     * Paper Instance this group belongs to
+     * 
+     * @return Relation
      */
     public function paperInstance()
     {
         return $this->belongsTo(PaperInstance::class);
     }
 
+    /**
+     * Roles belonging to this group
+     * 
+     * @return Relation
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
+    /**
+     * Users belonging to this group
+     * 
+     * @return Relation
+     */
     public function users()
     {
         return $this->belongsToMany(User::class);
     }
-
+    
     /**
      * Check if this group has a particular role
+     * 
+     * @param Role $role
+     * @return boolean
      */
-    public function hasRole($role)
+    public function hasRole(Role $role)
     {
         // Find the number of times that role's id appears in the group->roles
         $countRoles = $this->roles()->where('role_id', $role->id)->count();
