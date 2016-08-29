@@ -10,10 +10,18 @@ class Gradebook extends Model
     public $timestamps = true;
 
     /**
-    * Relationship to parent
+    * Get the PaperInstance that this Gradebook belongs to
     */
     public function paperInstance()
     {
         return $this->belongsTo(PaperInstance::class);
+    }
+
+    /**
+    * Get all checkpoints in this grade book
+    */
+    public function checkpoints()
+    {
+        return $this->hasMany(Checkpoint::class);
     }
 }
