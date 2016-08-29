@@ -9,14 +9,14 @@ import App from './App';
 
 // Pages
 import HomePage from './Pages/HomePage';
-import ClassFilesPage from './Pages/ClassFilesPage';
+import MyPapersPage from './Pages/MyPapersPage';
 
 ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={HomePage} />
 
-            <Route path="/class-files" component={ClassFilesPage} />
+            <Route path="/my-papers" component={MyPapersPage} />
         </Route>
     </Router>,
     document.getElementById('app')

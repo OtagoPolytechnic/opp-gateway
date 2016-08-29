@@ -26638,9 +26638,9 @@ exports.default = _react2.default.createClass({
                         null,
                         _react2.default.createElement(
                             _NavLink2.default,
-                            { to: '/class-files' },
-                            _react2.default.createElement('i', { className: 'fa fa-folder-open', 'aria-hidden': 'true' }),
-                            ' Class files'
+                            { to: '/my-papers' },
+                            _react2.default.createElement('i', { className: 'fa fa-leanpub', 'aria-hidden': 'true' }),
+                            ' My Papers'
                         )
                     ),
                     _react2.default.createElement(
@@ -26679,78 +26679,6 @@ exports.default = _react2.default.createClass({
 });
 
 },{"./components/NavLink":242,"react":235,"react-router":82}],240:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _RepoList = require('../components/RepoList');
-
-var _RepoList2 = _interopRequireDefault(_RepoList);
-
-require('whatwg-fetch');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _react2.default.createClass({
-    displayName: 'ClassFilesPage',
-    getInitialState: function getInitialState() {
-        return {
-            repos: []
-        };
-    },
-
-
-    // Fetch the class materials
-    componentWillMount: function componentWillMount() {
-        this.classMaterialsRequest = this.fetchClassMaterials();
-    },
-
-
-    // Abort the fetching of class materials to avoid a memory leak
-    componentWillUnmount: function componentWillUnmount() {
-        this.classMaterialsRequest.abort();
-    },
-    fetchClassMaterials: function fetchClassMaterials() {
-        var _this = this;
-
-        fetch('http://gateway.dev/api/v1/class-material').then(function (response) {
-            return response.json();
-        }).then(function (json) {
-            var data = json.data.class_materials;
-
-            var repos = [];
-
-            data[1].map(function (task) {
-                return repos[0].push({
-                    id: task.id,
-                    name: task.name
-                });
-            });
-
-            _this.setState({ repos: repos });
-        });
-    },
-    render: function render() {
-        return _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-                'h2',
-                { className: 'page-title' },
-                'Class materials'
-            ),
-            _react2.default.createElement(_RepoList2.default, { repos: this.state.repos })
-        );
-    }
-});
-
-},{"../components/RepoList":244,"react":235,"whatwg-fetch":238}],241:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26770,6 +26698,30 @@ exports.default = _react2.default.createClass({
             "h2",
             { className: "page-title" },
             "Home"
+        );
+    }
+});
+
+},{"react":235}],241:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _react2.default.createClass({
+    displayName: "MyPapersPage",
+    render: function render() {
+        return _react2.default.createElement(
+            "h2",
+            { className: "page-title" },
+            "My Papers"
         );
     }
 });
@@ -26799,107 +26751,6 @@ exports.default = _react2.default.createClass({
 });
 
 },{"react":235,"react-router":82}],243:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _react2.default.createClass({
-    displayName: "Repo",
-    render: function render() {
-        return _react2.default.createElement(
-            "li",
-            { className: "list-group-item" },
-            _react2.default.createElement(
-                "a",
-                { href: this.props.url },
-                this.props.title
-            )
-        );
-    }
-});
-
-},{"react":235}],244:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _RepoListGroup = require('./RepoListGroup');
-
-var _RepoListGroup2 = _interopRequireDefault(_RepoListGroup);
-
-var _Repo = require('./Repo');
-
-var _Repo2 = _interopRequireDefault(_Repo);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _react2.default.createClass({
-    displayName: 'RepoList',
-    render: function render() {
-        return _react2.default.createElement(
-            'div',
-            null,
-            this.props.repos.map(function (repoGroup, key) {
-                return _react2.default.createElement(_RepoListGroup2.default, { repos: repoGroup, key: key });
-            })
-        );
-    }
-});
-
-},{"./Repo":243,"./RepoListGroup":245,"react":235}],245:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Repo = require('./Repo');
-
-var _Repo2 = _interopRequireDefault(_Repo);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _react2.default.createClass({
-    displayName: 'RepoListGroup',
-    render: function render() {
-        return _react2.default.createElement(
-            'div',
-            { className: 'panel panel-default' },
-            _react2.default.createElement(
-                'div',
-                { className: 'panel-heading' },
-                this.props.repos.title
-            ),
-            _react2.default.createElement(
-                'ul',
-                { className: 'list-group' },
-                this.props.repos.data.map(function (repo, key) {
-                    return _react2.default.createElement(_Repo2.default, { title: repo.title, url: repo.url, key: key });
-                })
-            )
-        );
-    }
-});
-
-},{"./Repo":243,"react":235}],246:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -26922,9 +26773,9 @@ var _HomePage = require('./Pages/HomePage');
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _ClassFilesPage = require('./Pages/ClassFilesPage');
+var _MyPapersPage = require('./Pages/MyPapersPage');
 
-var _ClassFilesPage2 = _interopRequireDefault(_ClassFilesPage);
+var _MyPapersPage2 = _interopRequireDefault(_MyPapersPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26936,11 +26787,11 @@ _reactDom2.default.render(_react2.default.createElement(
         _reactRouter.Route,
         { path: '/', component: _App2.default },
         _react2.default.createElement(_reactRouter.IndexRoute, { component: _HomePage2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/class-files', component: _ClassFilesPage2.default })
+        _react2.default.createElement(_reactRouter.Route, { path: '/my-papers', component: _MyPapersPage2.default })
     )
 ), document.getElementById('app'));
 
 // App component (has the navbar and menu, etc.)
 // Imports
 
-},{"./App":239,"./Pages/ClassFilesPage":240,"./Pages/HomePage":241,"react":235,"react-dom":52,"react-router":82,"whatwg-fetch":238}]},{},[246]);
+},{"./App":239,"./Pages/HomePage":240,"./Pages/MyPapersPage":241,"react":235,"react-dom":52,"react-router":82,"whatwg-fetch":238}]},{},[243]);

@@ -11,14 +11,36 @@
 |
 */
 
-Route::get('/', function() {
-    return view('index');
-});
-
 /**
  * API version 1
  */
-Route::group(['prefix' => 'api/v1'], function()
+Route::group(['before' => 'api', 'namespace' => 'Api'], function()
 {
-    Route::get('class-material', 'Api\ClassMaterialController@all');
+    Route::group(['prefix' => 'v1'], function()
+    {
+        /**
+         * Papers
+         */
+        Route::get('papers', 'PaperController@all');
+
+        /**
+         * Users
+         */
+        Route::get('users', 'UserController@all');
+        Route::get('users/{user_id}/papers', 'UserController@all');
+    });
+
+    Route::any('*', function()
+    {
+        return 'Route does not exist';
+    })->where('path', '.*');
 });
+
+/**
+ * Send all routes to the React index
+ * Must come after API routes
+ */
+Route::any('{path?}', function()
+{
+    return view('index');
+})->where('path', '.*');

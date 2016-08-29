@@ -39,8 +39,8 @@ export default React.createClass({
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/class-files">
-                                <i className="fa fa-folder-open" aria-hidden="true"></i> Class files
+                            <NavLink to="/my-papers">
+                                <i className="fa fa-leanpub" aria-hidden="true"></i> My Papers
                             </NavLink>
                         </li>
                         <li>

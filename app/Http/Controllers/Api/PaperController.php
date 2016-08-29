@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Libraries\ApiResponseData;
-use App\Http\Controllers\Controller;
-use App\Paper;
 
-class ClassMaterialController extends Controller
+use App\Paper;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Libraries\ApiResponseData;
+
+class PaperController extends Controller
 {
     public function all()
     {
         // Make a new API Response Data object
         $responseData = new ApiResponseData();
         
-        // Get the class materials
-        $classMaterials = Paper::select(['name', 'github_url', 'year_level'])->get()->groupBy('year_level');
+        // Get all papers
+        $classMaterials = Paper::select(['name', 'code'])->get();
 
-        // Add the class materials to the response data object
+        // Add the papers to the response data object
         $responseData->addData('class_materials', $classMaterials->toArray());
 
         // Return our response with our data
