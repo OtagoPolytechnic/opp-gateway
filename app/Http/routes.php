@@ -24,10 +24,15 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
         Route::get('papers', 'PaperController@all');
 
         /**
+         * Paper Instances
+         */
+        Route::get('paper-instances/{paper-instance}/resources', 'PaperInstanceController@resources');
+
+        /**
          * Users
          */
         Route::get('users', 'UserController@all');
-        Route::get('users/{user_id}/papers', 'UserController@all');
+        Route::get('users/{user}/paper-instances', 'UserController@papers');
     });
 
     Route::any('*', function()
