@@ -9,6 +9,7 @@ import App from './App';
 
 // Pages
 import HomePage from './Pages/HomePage';
+import CalendarPage from './Pages/CalendarPage';
 import MyPapersPage from './Pages/MyPapersPage';
 
 ReactDOM.render(
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route path="/" component={App}>
             <IndexRoute component={HomePage} />
 
+            <Route path="/calendar" component={CalendarPage} />
             <Route path="/my-papers" component={MyPapersPage} />
         </Route>
     </Router>,

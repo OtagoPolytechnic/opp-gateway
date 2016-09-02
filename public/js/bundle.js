@@ -26628,7 +26628,7 @@ exports.default = _react2.default.createClass({
                         null,
                         _react2.default.createElement(
                             _NavLink2.default,
-                            { to: '/' },
+                            { to: '/calendar' },
                             _react2.default.createElement('i', { className: 'fa fa-calendar', 'aria-hidden': 'true' }),
                             ' Calendar'
                         )
@@ -26678,7 +26678,100 @@ exports.default = _react2.default.createClass({
     }
 });
 
-},{"./components/NavLink":242,"react":235,"react-router":82}],240:[function(require,module,exports){
+},{"./components/NavLink":244,"react":235,"react-router":82}],240:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Calendar = require('../components/Calendar');
+
+var _Calendar2 = _interopRequireDefault(_Calendar);
+
+require('whatwg-fetch');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _react2.default.createClass({
+  displayName: 'CalendarPage',
+  getInitialState: function getInitialState() {
+    return {
+      'events': [{
+        'title': 'All Day Event',
+        'allDay': true,
+        'start': new Date(2015, 3, 0),
+        'end': new Date(2015, 3, 0)
+      }, {
+        'title': 'Long Event',
+        'start': new Date(2015, 3, 7),
+        'end': new Date(2015, 3, 10)
+      }, {
+        'title': 'DTS STARTS',
+        'start': new Date(2016, 2, 13, 0, 0, 0),
+        'end': new Date(2016, 2, 20, 0, 0, 0)
+      }, {
+        'title': 'DTS ENDS',
+        'start': new Date(2016, 10, 6, 0, 0, 0),
+        'end': new Date(2016, 10, 13, 0, 0, 0)
+      }, {
+        'title': 'Some Event',
+        'start': new Date(2015, 3, 9, 0, 0, 0),
+        'end': new Date(2015, 3, 9, 0, 0, 0)
+      }, {
+        'title': 'Conference',
+        'start': new Date(2015, 3, 11),
+        'end': new Date(2015, 3, 13),
+        desc: 'Big conference for important people'
+      }, {
+        'title': 'Meeting',
+        'start': new Date(2015, 3, 12, 10, 30, 0, 0),
+        'end': new Date(2015, 3, 12, 12, 30, 0, 0),
+        desc: 'Pre-meeting meeting, to prepare for the meeting'
+      }, {
+        'title': 'Lunch',
+        'start': new Date(2015, 3, 12, 12, 0, 0, 0),
+        'end': new Date(2015, 3, 12, 13, 0, 0, 0),
+        desc: 'Power lunch'
+      }, {
+        'title': 'Meeting',
+        'start': new Date(2015, 3, 12, 14, 0, 0, 0),
+        'end': new Date(2015, 3, 12, 15, 0, 0, 0)
+      }, {
+        'title': 'Happy Hour',
+        'start': new Date(2015, 3, 12, 17, 0, 0, 0),
+        'end': new Date(2015, 3, 12, 17, 30, 0, 0),
+        desc: 'Most important meal of the day'
+      }, {
+        'title': 'Dinner',
+        'start': new Date(2015, 3, 12, 20, 0, 0, 0),
+        'end': new Date(2015, 3, 12, 21, 0, 0, 0)
+      }, {
+        'title': 'Birthday Party',
+        'start': new Date(2015, 3, 13, 7, 0, 0),
+        'end': new Date(2015, 3, 13, 10, 30, 0)
+      }]
+    };
+  },
+  render: function render() {
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'h2',
+        { className: 'page-title' },
+        'Calendar'
+      ),
+      _react2.default.createElement(_Calendar2.default, { events: this.state.events })
+    );
+  }
+});
+
+},{"../components/Calendar":243,"react":235,"whatwg-fetch":238}],241:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26702,7 +26795,7 @@ exports.default = _react2.default.createClass({
     }
 });
 
-},{"react":235}],241:[function(require,module,exports){
+},{"react":235}],242:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26726,7 +26819,40 @@ exports.default = _react2.default.createClass({
     }
 });
 
-},{"react":235}],242:[function(require,module,exports){
+},{"react":235}],243:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _react2.default.createClass({
+    displayName: 'Calendar',
+    componentDidMount: function componentDidMount() {
+        var calendar = this.refs.calendar;
+
+
+        $(calendar).fullCalendar({
+            events: this.props.events
+        });
+    },
+    componentWillUnmount: function componentWillUnmount() {
+        var calendar = this.refs.calendar;
+
+        //$(calendar).fullCalendar('destroy');
+    },
+    render: function render() {
+        return _react2.default.createElement('div', { ref: 'calendar' });
+    }
+});
+
+},{"react":235}],244:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26750,7 +26876,7 @@ exports.default = _react2.default.createClass({
     }
 });
 
-},{"react":235,"react-router":82}],243:[function(require,module,exports){
+},{"react":235,"react-router":82}],245:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -26773,13 +26899,18 @@ var _HomePage = require('./Pages/HomePage');
 
 var _HomePage2 = _interopRequireDefault(_HomePage);
 
+var _CalendarPage = require('./Pages/CalendarPage');
+
+var _CalendarPage2 = _interopRequireDefault(_CalendarPage);
+
 var _MyPapersPage = require('./Pages/MyPapersPage');
 
 var _MyPapersPage2 = _interopRequireDefault(_MyPapersPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Pages
+// App component (has the navbar and menu, etc.)
+// Imports
 _reactDom2.default.render(_react2.default.createElement(
     _reactRouter.Router,
     { history: _reactRouter.browserHistory },
@@ -26787,11 +26918,11 @@ _reactDom2.default.render(_react2.default.createElement(
         _reactRouter.Route,
         { path: '/', component: _App2.default },
         _react2.default.createElement(_reactRouter.IndexRoute, { component: _HomePage2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/calendar', component: _CalendarPage2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: '/my-papers', component: _MyPapersPage2.default })
     )
 ), document.getElementById('app'));
 
-// App component (has the navbar and menu, etc.)
-// Imports
+// Pages
 
-},{"./App":239,"./Pages/HomePage":240,"./Pages/MyPapersPage":241,"react":235,"react-dom":52,"react-router":82,"whatwg-fetch":238}]},{},[243]);
+},{"./App":239,"./Pages/CalendarPage":240,"./Pages/HomePage":241,"./Pages/MyPapersPage":242,"react":235,"react-dom":52,"react-router":82,"whatwg-fetch":238}]},{},[245]);

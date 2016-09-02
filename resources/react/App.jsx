@@ -34,7 +34,7 @@ export default React.createClass({
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/">
+                            <NavLink to="/calendar">
                                 <i className="fa fa-calendar" aria-hidden="true"></i> Calendar
                             </NavLink>
                         </li>
