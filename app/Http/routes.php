@@ -28,12 +28,14 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
          */
         Route::get('users', 'UserController@all');
         Route::get('users/{user_id}/papers', 'UserController@all');
-    });
+        Route::get('user/{user_id}/events');
 
-    Route::any('*', function()
-    {
-        return 'Route does not exist';
-    })->where('path', '.*');
+        /**
+         * Calendar
+         */
+        Route::get('calendars/{calendar_id}/events');
+        Route::get('calendars/{calendar_id}/subscribers');
+    });
 });
 
 /**

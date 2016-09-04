@@ -96,14 +96,14 @@ $factory->define(App\Calendar::class, function (Generator $faker) {
 });
 
 $factory->define(App\Event::class, function (Generator $faker) {
-    $startDate = Carbon::createFromTimeStamp($faker->dateTimeBetween('-30 days', '+30 days')->getTimestamp());
+    $startTime = Carbon::createFromTimeStamp($faker->dateTimeBetween('-30 days', '+30 days')->getTimestamp());
 
     return [
         'start_time' => $startTime,
         'duration' => rand(1, 10) * 15,
         'place' => 'D' . rand(1, 3) . rand(1, 15),
         'repeat_mode' => REPEAT_MODE_NO_REPEAT,
-        'last_day_of_repetition' => $startDate,
-        'repetition_id' => rand(100),
+        'last_day_of_repetition' => $startTime,
+        'repetition_id' => rand(0, 100),
     ];
 });
