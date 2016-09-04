@@ -16,9 +16,8 @@ class EventModelTest extends TestCase
         $calendar = factory(Calendar::class)->create(['owner_id' => $calendarOwner->id]);
         $event = factory(Event::class)->create(['calendar_id' => $calendar->id]);
 
-        $expected = true;
-        $actual = $calendar->events->contains($event);
-
-        $this->assertEquals($expected, $actual);
+        // We expect the event to exist in the calendar... Let's see if we're right
+        $calendarContainsEvent = $calendar->events->contains($event);
+        $this->assertTrue($calendarContainsEvent);
     }
 }
