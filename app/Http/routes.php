@@ -14,7 +14,7 @@
 /**
  * API version 1
  */
-Route::group(['before' => 'api', 'namespace' => 'Api'], function()
+Route::group(['before' => 'www.api', 'namespace' => 'Api'], function()
 {
     Route::group(['prefix' => 'v1'], function()
     {
@@ -26,7 +26,7 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
         /**
          * Paper Instances
          */
-        Route::get('paper-instances/{paper-instance}/resources', 'PaperInstanceController@resources');
+        Route::get('paper-instances/{paperInstance}/resources', 'PaperInstanceController@resources');
 
         /**
          * Users
