@@ -17,7 +17,7 @@ class PaperInstanceController extends Controller
         // Make a new API Response Data object
         $responseData = new ApiResponseData();
         
-        $resourceData = $paperInstance->toArray();
+        $resourceData = $paperInstance->resources()->select(['id', 'name', 'url'])->get()->toArray();
         // Add the papers to the response data object
         $responseData->addData('resources', $resourceData);
 

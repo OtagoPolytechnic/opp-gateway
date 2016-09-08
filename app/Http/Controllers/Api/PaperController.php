@@ -25,4 +25,6 @@ class PaperController extends Controller
         // Return our response with our data
         return response()->json($responseData->get());
     }
+
+     
 }
