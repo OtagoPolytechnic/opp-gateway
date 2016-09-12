@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         //Create a few date blocks
-        //$this->call(DateBlockSeeder::class)
+        $this->call(DateBlockSeeder::class);
 
 
         //TODO Create a few paper instances
