@@ -19,7 +19,7 @@ class CreateCheckpointTable extends Migration
             $table->decimal('weight',10,2);
             $table->date('date');
 
-            $table->integer('gradebook_id')->unsigned;
+            $table->integer('gradebook_id')->unsigned();
 
             $table->foreign('gradebook_id')
                   ->references('id')->on('gradebooks')
