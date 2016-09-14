@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\PaperInstance;
+use App\Checkpoint;
 
 class Gradebook extends Model
 {
