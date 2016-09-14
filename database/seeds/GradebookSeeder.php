@@ -20,17 +20,27 @@ class GradebookSeeder extends Seeder
 
         //Do Y2016S1 papers
         $this->createGradebook('IN511', 'Y2016S1');
+        //Leave one of the paper instance without a gradebook
+        //$this->createGradebook('IN512', 'Y2016S1');
+        $this->createGradebook('IN523', 'Y2016S1');
 
-        // Gradebook::create(['paper_instances_id' =>
-        //     PaperInstance::where('paper_id', Paper::where('code','IN511')->value('id'))->
-        //     where('date_block_id' , $semester1)->value('id')
-        //     ]);
+        //Do Y2016S2 papers
+        $this->createGradebook('IN511', 'Y2016S2');
+        $this->createGradebook('IN512', 'Y2016S2');
+        //Leave this one blank, only exists in semester 1
+        //$this->createGradebook('IN523', 'Y2016S2');
+        $this->createGradebook('IN524', 'Y2016S2');
+        $this->createGradebook('IN535', 'Y2016S2');
+        $this->createGradebook('IN536', 'Y2016S2');
     }
 
     /**
      * Create a Gradebook given the paper code and the dateblock the paper is in
      * There is no check that a paper instance exists for the given paper and dateblock!
-     * TODO Add params
+     * TODO Throw exception on missing PaperInstance
+     *
+     * @param string $paper_code The code for a Paper
+     * @param string $date_block The name of a DateBlock
      * @return void
      */
     public function createGradebook($paper_code, $date_block)
