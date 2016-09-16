@@ -7,7 +7,7 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     * use 'composer dump-autoload' when adding a new seeder!
      * @return void
      */
     public function run()

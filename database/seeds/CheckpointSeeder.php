@@ -18,6 +18,11 @@ class CheckpointSeeder extends Seeder
 
         //Create a few checkpoints on one gradebook
         //Get gradebook
-        $gradebook = DB::Gradebook()
+        $gradebook = Gradebook::all()->first();
+
+        $gradebook->addCheckpoint(['weight'=>'0.5','date'=>'2016-02-22']);
+        $gradebook->addCheckpoint(['weight'=>'0.5','date'=>'2016-02-29']);
+        $gradebook->addCheckpoint(['weight'=>'0.5','date'=>'2016-03-07']);
+        $gradebook->addCheckpoint(['weight'=>'0.5','date'=>'2016-03-14']);
     }
 }
