@@ -46,7 +46,15 @@ class PaperInstance extends Model
     }
 
     /**
-     * Creates a new resource for this paper
+    * Get Gradebook for this PaperInstance
+    */
+    public function gradebook()
+    {
+        return $this->hasOne(Gradebook::class);
+    }
+
+    /**
+     * Creates a new resource for this PaperInstance
      */
     public function createResource($data)
     {
