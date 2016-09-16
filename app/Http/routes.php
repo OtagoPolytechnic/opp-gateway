@@ -22,6 +22,7 @@ Route::group(['before' => 'www.api', 'namespace' => 'Api'], function()
          * Papers
          */
         Route::get('papers', 'PaperController@all');
+        Route::get('papers/{paper}/instances', 'PaperController@instances');
 
         /**
          * Paper Instances

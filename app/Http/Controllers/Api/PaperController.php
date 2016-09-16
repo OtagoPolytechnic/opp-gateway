@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 
 use App\Paper;
+use App\PaperInstances;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponseData;
@@ -21,6 +22,23 @@ class PaperController extends Controller
 
         // Add the papers to the response data object
         $responseData->addData('class_materials', $classMaterials->toArray());
+
+        // Return our response with our data
+        return response()->json($responseData->get());
+    }
+
+    /** Find the paper instances for the given paper
+    * @param $paper Particular paper
+    * @return All paper-instances for the given paper
+    */
+    public function instances(Paper $paper)
+    {
+        $responseData = new ApiResponseData();
+        //$paperInstances = $paper->instances->select(['id', ''])->get();
+        $paperInstances = $paper->instances()->select('paper_id', 'date_block_id',
+        'lecturer_group_id')->get();
+
+        $responseData->addData('paper_instances', $paperInstances->toArray());
 
         // Return our response with our data
         return response()->json($responseData->get());

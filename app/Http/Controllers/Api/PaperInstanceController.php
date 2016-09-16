@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 
 use App\PaperInstance;
+use App\Paper;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -17,12 +18,14 @@ class PaperInstanceController extends Controller
         // Make a new API Response Data object
         $responseData = new ApiResponseData();
         
-        $resourceData = $paperInstance->resources()->select(['id', 'name', 'url'])->get()->toArray();
+        $resourceData = $paperInstance->resources()->select(['id', 'name', 'url'])->get();
         // Add the papers to the response data object
-        $responseData->addData('resources', $resourceData);
+        $responseData->addData('resources', $resourceData)->toArray();
 
         // Return our response with our data
         return response()->json($responseData->get());    
 
     }
+
+  
 }
