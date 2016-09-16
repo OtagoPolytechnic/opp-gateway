@@ -20,10 +20,20 @@ class Gradebook extends Model
     }
 
     /**
-    * Get all checkpoints in this grade book
+    * Get all checkpoints in this Gradebook
     */
     public function checkpoints()
     {
         return $this->hasMany(Checkpoint::class);
+    }
+
+    /**
+    * Add a new Checkpoint to this Gradebook
+    */
+    public function addCheckpoint($data)
+    {
+        $data['gradebook_id']=$this->id;
+        return Checkpoint::create($data);
+
     }
 }

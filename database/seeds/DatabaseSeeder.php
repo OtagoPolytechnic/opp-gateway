@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(DateBlockSeeder::class);
         $this->call(PaperInstanceSeeder::class);
-
         $this->call(GradebookSeeder::class);
 
-        //TODO Create a few checkpoints
+        $this->call(CheckpointSeeder::class);
+
         //TODO Create a few checkpoint_user marks
         //TODO Create a few resources
 
