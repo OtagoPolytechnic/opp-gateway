@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Checkpoint extends Model
 {
     protected $fillable = [
+        'gradebook_id',
         'weight',
         'date',
     ];

@@ -34,6 +34,5 @@ class Gradebook extends Model
     {
         $data['gradebook_id']=$this->id;
         return Checkpoint::create($data);
-
     }
 }
