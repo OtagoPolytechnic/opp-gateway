@@ -22,7 +22,7 @@ class CreateEventsTable extends Migration
             $table->string('place');
 
             // Repeating events...
-            $table->integer('repeat_mode')->default(REPEAT_MODE_NO_REPEAT);
+            $table->string('repeat_mode')->default(REPEAT_MODE_NO_REPEAT);
             $table->date('last_day_of_repetition');
             $table->integer('repetition_id'); // So we can find which events are part of a single repeating event. This will be the id of the first event (doesn't matter if that event is deleted)
 

@@ -25,4 +25,22 @@ class UserController extends Controller
         // Return our response with our data
         return response()->json($responseData->get());
     }
+
+    /**
+     * Events in calendars this user subscribes to
+     */
+    public function events(User $user)
+    {
+        // Make a new API Response Data object
+        $responseData = new ApiResponseData();
+        
+        // Get all users
+        $events = $user->events();
+
+        // Add the users to the response data object
+        $responseData->addData('events', $events->toArray());
+
+        // Return our response with our data
+        return response()->json($responseData->get());
+    }
 }

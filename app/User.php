@@ -60,4 +60,37 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Calendar::class, 'calendar_subscriber');
     }
+
+    /**
+     * Events in calendars this user subscribes to
+     */
+    public function events()
+    {
+        // Specify what we want to select
+        $query = Event::select([
+            'events.id as event_id',
+            'events.name as event_name',
+            'calendars.id as calendar_id',
+            'calendars.name as calendar_name',
+            'calendars.colour as colour',
+            'events.start_time',
+            'events.duration',
+            'events.place',
+            'events.repeat_mode',
+            'events.last_day_of_repetition',
+            'events.repetition_id'
+        ]);
+        
+        // Grab all events and join with calendars
+        $query->join('calendars', 'events.calendar_id', '=', 'calendars.id');
+
+        // Join calendars on the calendar_subscriber pivot table
+        $query->join('calendar_subscriber', 'calendars.id', '=', 'calendar_subscriber.calendar_id');
+
+        // Only show events where the pivot tables user_id is the same as this user's id 
+        $query->where('calendar_subscriber.user_id', $this->id);
+
+        // Return all the events for this user
+        return $query->get();
+    }
 }

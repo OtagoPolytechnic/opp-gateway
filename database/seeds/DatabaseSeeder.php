@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PaperSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(CalendarSeeder::class);
+        $this->call(EventSeeder::class);
 
         // Set the DB back to normal
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');

@@ -99,11 +99,11 @@ $factory->define(App\Event::class, function (Generator $faker) {
     $startTime = Carbon::createFromTimeStamp($faker->dateTimeBetween('-30 days', '+30 days')->getTimestamp());
 
     return [
+        'name' => $faker->words(2, true),
         'start_time' => $startTime,
         'duration' => rand(1, 10) * 15,
         'place' => 'D' . rand(1, 3) . rand(1, 15),
         'repeat_mode' => REPEAT_MODE_NO_REPEAT,
         'last_day_of_repetition' => $startTime,
-        'repetition_id' => rand(0, 100),
     ];
 });

@@ -12,7 +12,26 @@ class Calendar extends Model
     protected $fillable = [
         'owner_id',
         'name',
+        'colour',
     ];
+    
+    /**
+     * Override the create method so we can automatically subscribe the owner
+     * 
+     * @param array $data
+     * @return App\Calendar
+     */
+    public static function create(array $data = [])
+    {
+        // Create the calendar normally
+        $calendar = parent::create($data);
+
+        // Add the calendar owner as a subscriber
+        $calendar->subscribers()->attach($data['owner_id']);
+
+        // Return the calendar
+        return $calendar;
+    }
 
     /**
      * User that owns this calendar

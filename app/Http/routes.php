@@ -27,14 +27,15 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
          * Users
          */
         Route::get('users', 'UserController@all');
-        Route::get('users/{user_id}/papers', 'UserController@all');
-        Route::get('user/{user_id}/events');
+        Route::get('users/{user}/papers', 'UserController@all');
+        Route::get('users/{user}/calendars', 'UserController@calendars');
+        Route::get('users/{user}/events', 'UserController@events');
 
         /**
          * Calendar
          */
-        Route::get('calendars/{calendar_id}/events');
-        Route::get('calendars/{calendar_id}/subscribers');
+        Route::get('calendars/{calendar}/events', 'CalendarContoller@events');
+        Route::get('calendars/{calendar}/subscribers', 'CalendarContoller@subscribers');
     });
 });
 

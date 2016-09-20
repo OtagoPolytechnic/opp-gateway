@@ -26682,7 +26682,7 @@ exports.default = _react2.default.createClass({
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react = require('react');
@@ -26698,77 +26698,34 @@ require('whatwg-fetch');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _react2.default.createClass({
-  displayName: 'CalendarPage',
-  getInitialState: function getInitialState() {
-    return {
-      'events': [{
-        'title': 'All Day Event',
-        'allDay': true,
-        'start': new Date(2015, 3, 0),
-        'end': new Date(2015, 3, 0)
-      }, {
-        'title': 'Long Event',
-        'start': new Date(2015, 3, 7),
-        'end': new Date(2015, 3, 10)
-      }, {
-        'title': 'DTS STARTS',
-        'start': new Date(2016, 2, 13, 0, 0, 0),
-        'end': new Date(2016, 2, 20, 0, 0, 0)
-      }, {
-        'title': 'DTS ENDS',
-        'start': new Date(2016, 10, 6, 0, 0, 0),
-        'end': new Date(2016, 10, 13, 0, 0, 0)
-      }, {
-        'title': 'Some Event',
-        'start': new Date(2015, 3, 9, 0, 0, 0),
-        'end': new Date(2015, 3, 9, 0, 0, 0)
-      }, {
-        'title': 'Conference',
-        'start': new Date(2015, 3, 11),
-        'end': new Date(2015, 3, 13),
-        desc: 'Big conference for important people'
-      }, {
-        'title': 'Meeting',
-        'start': new Date(2015, 3, 12, 10, 30, 0, 0),
-        'end': new Date(2015, 3, 12, 12, 30, 0, 0),
-        desc: 'Pre-meeting meeting, to prepare for the meeting'
-      }, {
-        'title': 'Lunch',
-        'start': new Date(2015, 3, 12, 12, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 13, 0, 0, 0),
-        desc: 'Power lunch'
-      }, {
-        'title': 'Meeting',
-        'start': new Date(2015, 3, 12, 14, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 15, 0, 0, 0)
-      }, {
-        'title': 'Happy Hour',
-        'start': new Date(2015, 3, 12, 17, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 17, 30, 0, 0),
-        desc: 'Most important meal of the day'
-      }, {
-        'title': 'Dinner',
-        'start': new Date(2015, 3, 12, 20, 0, 0, 0),
-        'end': new Date(2015, 3, 12, 21, 0, 0, 0)
-      }, {
-        'title': 'Birthday Party',
-        'start': new Date(2015, 3, 13, 7, 0, 0),
-        'end': new Date(2015, 3, 13, 10, 30, 0)
-      }]
-    };
-  },
-  render: function render() {
-    return _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(
-        'h2',
-        { className: 'page-title' },
-        'Calendar'
-      ),
-      _react2.default.createElement(_Calendar2.default, { events: this.state.events })
-    );
-  }
+    displayName: 'CalendarPage',
+    getInitialState: function getInitialState() {
+        return {
+            'events': []
+        };
+    },
+
+
+    componentDidMount: function componentDidMount() {
+        // this.fetchEventsRequest = this.fetchEvents(1);
+    },
+
+    componentWillUnmount: function componentWillUnmount() {
+        // this.fetchEventsRequest.abort();
+    },
+
+    render: function render() {
+        return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+                'h2',
+                { className: 'page-title' },
+                'Calendar'
+            ),
+            _react2.default.createElement(_Calendar2.default, { events: this.state.events })
+        );
+    }
 });
 
 },{"../components/Calendar":243,"react":235,"whatwg-fetch":238}],241:[function(require,module,exports){
@@ -26834,19 +26791,62 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _react2.default.createClass({
     displayName: 'Calendar',
+    getInitialState: function getInitialState() {
+        return {
+            'events': []
+        };
+    },
     componentDidMount: function componentDidMount() {
-        var calendar = this.refs.calendar;
-
-
-        $(calendar).fullCalendar({
-            events: this.props.events
-        });
+        this.fetchEventsRequest = this.fetchEvents(1);
     },
     componentWillUnmount: function componentWillUnmount() {
+        this.fetchEventsRequest.abort();
         var calendar = this.refs.calendar;
 
-        //$(calendar).fullCalendar('destroy');
+
+        $(calendar).fullCalendar('destroy');
     },
+
+
+    fetchEvents: function fetchEvents(userId) {
+        var _this = this;
+
+        $.ajax({
+            url: 'http://api.gateway.dev/v1/users/' + userId + '/events',
+            success: function success(data) {
+                var events = [];
+                data = data['data']['events'];
+
+                data.map(function (event) {
+                    var start = new moment(event['start_time']);
+                    var duration = event['duration'];
+                    var end = start.add(duration, 'minutes');
+
+                    events.push({
+                        title: event['event_name'],
+                        start: start.toDate(),
+                        end: end.toDate(),
+                        color: '#' + event['colour']
+                    });
+                });
+
+                _this.setState({ events: events });
+            }
+        }).then(function () {
+            var calendar = _this.refs.calendar;
+
+
+            $(calendar).fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                events: _this.state.events
+            });
+        });
+    },
+
     render: function render() {
         return _react2.default.createElement('div', { ref: 'calendar' });
     }
