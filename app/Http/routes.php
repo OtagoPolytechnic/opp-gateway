@@ -14,7 +14,7 @@
 /**
  * API version 1
  */
-Route::group(['before' => 'api', 'namespace' => 'Api'], function()
+Route::group(['before' => 'api', 'namespace' => 'Api', 'middleware' => 'cors'], function()
 {
     Route::group(['prefix' => 'v1'], function()
     {
