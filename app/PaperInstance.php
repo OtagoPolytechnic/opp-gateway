@@ -42,7 +42,10 @@ class PaperInstance extends Model
 
     public function groups()
     {
-        return $this->hasMany(Group::class);
+        //Get all groups EXCEPT the lecturersGroup
+        $groups = $this->hasMany(Group::class)->where('id' , '!=', $this->lecturer_group_id);
+
+        return $groups;
     }
 
     /**
