@@ -28,8 +28,7 @@ class DatabaseSeeder extends Seeder
         //TODO Create a few checkpoint_user marks
         //TODO Create a few resources
 
-        //TODO Student groups
-        //TODO Lecturer groups
+        $this->call(GroupSeeder::class);
 
         // Set the DB back to normal
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
