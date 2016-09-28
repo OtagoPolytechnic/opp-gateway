@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\PaperInstance;
 use App\Group;
+use App\Role;
 
 class GroupSeeder extends Seeder
 {
@@ -39,10 +40,10 @@ class GroupSeeder extends Seeder
             $name = 'Student: ';
             $name.= $PaperInstance->paper->name;
 
-            Group::create(['paper_instance_id' => $PaperInstance->id,
-                           'name' => $name,
-                           'hidden' => false
-                           ]);
+            $sg=Group::create(['paper_instance_id' => $PaperInstance->id,
+                               'name' => $name,
+                               'hidden' => false
+                               ]);
         }
     }
 }

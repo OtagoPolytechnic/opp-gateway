@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         //TODO Create a few resources
 
         $this->call(GroupSeeder::class);
+        $this->call(Group_RoleSeeder::class);
 
         // Set the DB back to normal
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
