@@ -35,17 +35,27 @@ class PaperInstance extends Model
         return $this->belongsTo(DateBlock::class);
     }
 
+    /**
+    * Get the lecturers group
+    */
     public function lecturersGroup()
     {
         return $this->hasOne(Group::class, 'id', 'lecturer_group_id');
     }
 
+    /**
+    * Get all groups linked to this paper_instance
+    */
     public function groups()
     {
-        //Get all groups EXCEPT the lecturersGroup
-        $groups = $this->hasMany(Group::class)->where('id' , '!=', $this->lecturer_group_id);
+        return $this->hasMany(Group::class);
+    }
 
-        return $groups;
+    /**
+    * Get the student groups(all groups except the lecturers group)
+    */
+    public function studentsGroups(){
+        return $this->hasMany(Group::class)->where('id', '!=', $this->lecturer_group_id);
     }
 
     /**
