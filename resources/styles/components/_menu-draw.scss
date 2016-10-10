@@ -2,31 +2,76 @@
     position: fixed;
     width: $menu-draw-width;
     height: 100%;
-    background: #eee;
-    top: 53px;
+    background: $menu-draw-background;
     transition: $menu-draw-transition;
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-        margin-top: 30px;
-    }
+    .menu-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: $colour-dark;
+        width: $menu-draw-width;
+        height: $navbar-height;
+        transition: $menu-draw-transition;
 
-    li {
-        padding: 8px 0;
-        font-size: 1.3em;
-    }
+        i {
+            position: fixed;
+            width: $navbar-height;
+            height: $navbar-height;
+            background: $colour-dark;
+        }
 
-    i {
-        padding: 0 15px;
-        margin-left: 5px;
-        height: 1em;
-        width: 2.5em;
-        text-align: center;
+        .navbar-brand {
+            padding-left: 1em;
+            transition: $menu-draw-transition;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .menu-draw-collpased & {
+            width: 60px;
+            transition: $menu-draw-transition;
+
+            .navbar-brand {
+                margin-left: calc(-#{$menu-draw-width} + 60px);
+                transition: $menu-draw-transition;
+            }
+        }
     }
 
     .menu-draw-collpased & {
         margin-left: -#{$menu-draw-width};
+    }
+
+    .menu-draw-section {
+        border-left: 4px solid $colour-primary;
+        margin-top: 30px;
+
+        .menu-section-title {
+            font-size: 1.2em;
+            // text-align: center;
+            font-weight: bold;
+            display: block;
+            padding: 8px;
+        }
+    
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px 0;
+            font-size: 1.3em;
+        }
+
+        i {
+            padding: 0 15px;
+            margin-left: 5px;
+            height: 1em;
+            width: 2.5em;
+            text-align: center;
+        }
     }
 }
 

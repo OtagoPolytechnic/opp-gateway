@@ -23,16 +23,16 @@ class CalendarSeeder extends Seeder
         $user3 = App\User::FindOrFail(3);
         
         // Create some calendars some with with subscribers
-        $calendar1 = Calendar::create(['owner_id' => $user1->id, 'name' => 'Calendar One', 'colour' => '3AAED8']);
+        $calendar1 = Calendar::create(['owner_id' => $user1->id, 'name' => 'Calendar One', 'colour' => '7e9949']);
 
-        $calendar2 = Calendar::create(['owner_id' => $user1->id, 'name' => 'Calendar Two', 'colour' => '388659']);
+        $calendar2 = Calendar::create(['owner_id' => $user1->id, 'name' => 'Calendar Two', 'colour' => '3E78B2']);
         $calendar2->subscribers()->attach($user2);
         $calendar2->subscribers()->attach($user3);
 
-        $calendar3 = Calendar::create(['owner_id' => $user1->id, 'name' => 'Calendar Three', 'colour' => 'D7263D']);
+        $calendar3 = Calendar::create(['owner_id' => $user1->id, 'name' => 'Calendar Three', 'colour' => 'C03221']);
         $calendar3->subscribers()->attach($user2);
 
-        $calendar4 = Calendar::create(['owner_id' => $user2->id, 'name' => 'Calendar for User 2', 'colour' => '182825']);
+        $calendar4 = Calendar::create(['owner_id' => $user2->id, 'name' => 'Calendar for User 2', 'colour' => 'E3B505']);
         $calendar4->subscribers()->attach($user1);
     }
 }

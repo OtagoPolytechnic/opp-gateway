@@ -1,4 +1,17 @@
 .page-title {
+    position: fixed;
+    width: 100%;
+    top: 0;
     margin-top: 0;
     margin-bottom: 30px;
+    background: lighten($colour-dark, 45%);
+    color: white;
+    padding: 10px;
+    height: $navbar-height;
+    transition: $menu-draw-transition;
+    z-index: 100;
+    
+    .menu-draw-collpased & {
+        transition: $menu-draw-transition;
+    }
 }

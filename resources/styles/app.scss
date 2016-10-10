@@ -15,7 +15,6 @@ a {
 .main-container {
     width: calc(100% - #{$menu-draw-width});
     margin-left: $menu-draw-width;
-    margin-top: 50px;
     transition: $menu-draw-transition;
 
     .menu-draw-collpased & {
@@ -29,5 +28,6 @@ a {
 }
 
 .main-content {
-    padding: 30px
+    padding: 30px;
+    margin-top: $navbar-height;
 }

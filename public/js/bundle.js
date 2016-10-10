@@ -26595,72 +26595,85 @@ exports.default = _react2.default.createClass({
             { className: this.state.menuCollapsed ? 'menu-draw-collpased' : '' },
             _react2.default.createElement(
                 'nav',
-                { className: 'navbar navbar-inverse navbar-fixed-top' },
-                _react2.default.createElement('i', { className: 'fa fa-bars menu-draw-toggle', onClick: this.menuButtonClicked }),
+                { className: 'menu-draw' },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'navbar-header' },
+                    'nav',
+                    { className: 'menu-header' },
+                    _react2.default.createElement('i', { className: 'fa fa-bars menu-draw-toggle', onClick: this.menuButtonClicked }),
                     _react2.default.createElement(
                         'a',
                         { className: 'navbar-brand', href: '#' },
                         'OPP Gateway'
                     )
-                )
-            ),
-            _react2.default.createElement(
-                'nav',
-                { className: 'menu-draw' },
+                ),
                 _react2.default.createElement(
-                    'ul',
-                    null,
+                    'div',
+                    { className: 'menu-draw-section' },
                     _react2.default.createElement(
-                        'li',
+                        'ul',
                         null,
                         _react2.default.createElement(
-                            _NavLink2.default,
-                            { to: '/', onlyActiveOnIndex: true },
-                            _react2.default.createElement('i', { className: 'fa fa-home', 'aria-hidden': 'true' }),
-                            ' Home'
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                _NavLink2.default,
+                                { to: '/', onlyActiveOnIndex: true },
+                                _react2.default.createElement('i', { className: 'fa fa-home', 'aria-hidden': 'true' }),
+                                ' Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                _NavLink2.default,
+                                { to: '/calendar' },
+                                _react2.default.createElement('i', { className: 'fa fa-calendar', 'aria-hidden': 'true' }),
+                                ' Calendar'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                _NavLink2.default,
+                                { to: '/my-papers' },
+                                _react2.default.createElement('i', { className: 'fa fa-leanpub', 'aria-hidden': 'true' }),
+                                ' My Papers'
+                            )
                         )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'menu-draw-section' },
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'menu-section-title' },
+                        'Handy Links'
                     ),
                     _react2.default.createElement(
-                        'li',
+                        'ul',
                         null,
                         _react2.default.createElement(
-                            _NavLink2.default,
-                            { to: '/calendar' },
-                            _react2.default.createElement('i', { className: 'fa fa-calendar', 'aria-hidden': 'true' }),
-                            ' Calendar'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        null,
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: 'http://gitlab.op-bit.nz' },
+                                _react2.default.createElement('i', { className: 'fa fa-code-fork', 'aria-hidden': 'true' }),
+                                ' GitLab'
+                            )
+                        ),
                         _react2.default.createElement(
-                            _NavLink2.default,
-                            { to: '/my-papers' },
-                            _react2.default.createElement('i', { className: 'fa fa-leanpub', 'aria-hidden': 'true' }),
-                            ' My Papers'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        null,
-                        _react2.default.createElement(
-                            'a',
-                            { href: 'http://gitlab.op-bit.nz' },
-                            _react2.default.createElement('i', { className: 'fa fa-code-fork', 'aria-hidden': 'true' }),
-                            ' GitLab'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        null,
-                        _react2.default.createElement(
-                            'a',
-                            { href: 'http://mattermost.op-bit.nz' },
-                            _react2.default.createElement('i', { className: 'fa fa-comment', 'aria-hidden': 'true' }),
-                            ' Mattermost'
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: 'https://mattermost.op-bit.nz/op-bit/' },
+                                _react2.default.createElement('i', { className: 'fa fa-comment', 'aria-hidden': 'true' }),
+                                ' Mattermost'
+                            )
                         )
                     )
                 )
@@ -26668,11 +26681,7 @@ exports.default = _react2.default.createClass({
             _react2.default.createElement(
                 'div',
                 { className: 'main-container' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'main-content' },
-                    this.props.children
-                )
+                this.props.children
             )
         );
     }
@@ -26704,107 +26713,11 @@ exports.default = _react2.default.createClass({
             'events': []
         };
     },
-
-
-    componentDidMount: function componentDidMount() {
-        // this.fetchEventsRequest = this.fetchEvents(1);
-    },
-
-    componentWillUnmount: function componentWillUnmount() {
-        // this.fetchEventsRequest.abort();
-    },
-
-    render: function render() {
-        return _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-                'h2',
-                { className: 'page-title' },
-                'Calendar'
-            ),
-            _react2.default.createElement(_Calendar2.default, { events: this.state.events })
-        );
-    }
-});
-
-},{"../components/Calendar":243,"react":235,"whatwg-fetch":238}],241:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _react2.default.createClass({
-    displayName: "HomePage",
-    render: function render() {
-        return _react2.default.createElement(
-            "h2",
-            { className: "page-title" },
-            "Home"
-        );
-    }
-});
-
-},{"react":235}],242:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _react2.default.createClass({
-    displayName: "MyPapersPage",
-    render: function render() {
-        return _react2.default.createElement(
-            "h2",
-            { className: "page-title" },
-            "My Papers"
-        );
-    }
-});
-
-},{"react":235}],243:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _react2.default.createClass({
-    displayName: 'Calendar',
-    getInitialState: function getInitialState() {
-        return {
-            'events': []
-        };
-    },
     componentDidMount: function componentDidMount() {
         this.fetchEventsRequest = this.fetchEvents(1);
     },
     componentWillUnmount: function componentWillUnmount() {
         this.fetchEventsRequest.abort();
-        var calendar = this.refs.calendar;
-
-
-        $(calendar).fullCalendar('destroy');
     },
 
 
@@ -26832,23 +26745,130 @@ exports.default = _react2.default.createClass({
 
                 _this.setState({ events: events });
             }
-        }).then(function () {
-            var calendar = _this.refs.calendar;
-
-
-            $(calendar).fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                events: _this.state.events
-            });
         });
     },
 
     render: function render() {
-        return _react2.default.createElement('div', { ref: 'calendar' });
+        return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+                'div',
+                { className: 'page-title' },
+                'Calendar'
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'main-content' },
+                _react2.default.createElement(_Calendar2.default, { events: this.state.events })
+            )
+        );
+    }
+});
+
+},{"../components/Calendar":243,"react":235,"whatwg-fetch":238}],241:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _react2.default.createClass({
+    displayName: "HomePage",
+    render: function render() {
+        return _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement(
+                "h2",
+                { className: "page-title" },
+                "Home"
+            ),
+            _react2.default.createElement("div", { className: "main-content" })
+        );
+    }
+});
+
+},{"react":235}],242:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _react2.default.createClass({
+    displayName: "MyPapersPage",
+    render: function render() {
+        return _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement(
+                "h2",
+                { className: "page-title" },
+                "My Papers"
+            ),
+            _react2.default.createElement("div", { className: "main-content" })
+        );
+    }
+});
+
+},{"react":235}],243:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _react2.default.createClass({
+    displayName: 'Calendar',
+    getInitialState: function getInitialState() {
+        return {
+            'events': []
+        };
+    },
+    componentWillUnmount: function componentWillUnmount() {
+        var calendar = this.refs.calendar;
+
+
+        $(calendar).fullCalendar('destroy');
+    },
+    componentDidUpdate: function componentDidUpdate() {
+        var calendar = this.refs.calendar;
+
+
+        $(calendar).fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: this.props.events
+        });
+    },
+    render: function render() {
+        return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement('div', { ref: 'calendar' })
+        );
     }
 });
 
