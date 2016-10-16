@@ -8,6 +8,10 @@ use App\Checkpoint;
 
 class Gradebook extends Model
 {
+    protected $fillable = [
+        'paper_instances_id',
+    ];
+    
     //TODO Do we need this?
     public $timestamps = true;
 

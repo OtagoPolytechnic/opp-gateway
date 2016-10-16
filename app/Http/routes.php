@@ -18,6 +18,7 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
 {
     Route::group(['prefix' => 'v1'], function()
     {
+        //TODO This to be overwritten by merge
         /**
          * Papers
          */
@@ -28,6 +29,19 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
          */
         Route::get('users', 'UserController@all');
         Route::get('users/{user_id}/papers', 'UserController@all');
+
+        //End overwrite
+
+        //New stuff by Arron and Josh
+        /**
+         * Gradebooks
+         */
+
+        //Create a new gradebook(or return existing)
+        Route::post('gradebooks','GradebookController@create');
+        
+
+
     });
 
     Route::any('*', function()

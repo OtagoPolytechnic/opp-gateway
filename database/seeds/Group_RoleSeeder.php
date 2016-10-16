@@ -27,7 +27,7 @@ class Group_RoleSeeder extends Seeder
         //Loop through all PaperInstances
         foreach($PaperInstances as $PaperInstance){
             //Get all lecturer groups for this paper instance and assign LecturerRole
-            $PaperInstance->lecturersGroup->roles()->attach($LecturerRole->id);$g->
+            $PaperInstance->lecturersGroup->roles()->attach($LecturerRole->id);
 
             //Get all student groups for this paper instance and assign StudentRole
             foreach($PaperInstance->groups as $StudentGroup){
