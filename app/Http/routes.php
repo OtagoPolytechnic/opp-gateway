@@ -38,8 +38,9 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
          */
 
         //Create a new gradebook(or return existing)
-        Route::post('gradebooks','GradebookController@create');
-        
+        Route::post('gradebooks', 'GradebookController@create');
+        //Retrieve a particular Gradebook
+        Route::get('gradebooks/{gradebook}', 'GradebookController@retrieve');
 
 
     });
