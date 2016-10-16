@@ -39,10 +39,20 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
 
         //Create a new gradebook(or return existing)
         Route::post('gradebooks', 'GradebookController@create');
+
         //Retrieve a particular Gradebook
         Route::get('gradebooks/{gradebook}', 'GradebookController@retrieve');
 
-
+        /**
+         * Checkpoints
+         */
+        //Create a new checkpoint
+        Route::post('gradebooks/{gradebook}/checkpoints', 'CheckpointController@create');
+        //Get all the checkpoints for this gradebook
+        Route::get('gradebooks/{gradebook}/checkpoints', 'CheckpointController@retrieve');
+        //Assign a mark to a user for a checkpoint
+        Route::post('checkpoints/{checkpoint}', 'CheckpointController@createMark');
+        
     });
 
     Route::any('*', function()

@@ -34,10 +34,6 @@ class GradebookController extends Controller
     public function retrieve(Gradebook $gradebook)
     {
         $responseData = new ApiResponseData();
-
-        // if ($gradebook==null){
-        //     return http_response_code(404);
-        // }
         $responseData->addData('gradebook', $gradebook);
 
         // Return our response with our data

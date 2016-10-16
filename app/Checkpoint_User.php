@@ -12,5 +12,6 @@ class Checkpoint_User extends Model
         'score',
         ];
 
+    protected $table = 'checkpoint_user';
     //TODO Relationships?
 }

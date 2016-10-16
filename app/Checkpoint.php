@@ -19,4 +19,12 @@ class Checkpoint extends Model
     {
         return $this->belongsTo(Gradebook::class);
     }
+
+    public function createMark(User $user, $score)
+    {
+        $checkpointMark = ['checkpoint_id'=>$this->id,
+                           'user_id'=>$user->id,
+                           'score'=>$score];
+        return Checkpoint_User::create($checkpointMark);
+    }
 }
