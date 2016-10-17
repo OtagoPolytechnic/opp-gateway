@@ -16,7 +16,7 @@ class CreateGradebooksTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->integer('paper_instances_id')->unsigned()->unique();
+            $table->integer('paper_instances_id')->unsigned();
 
             $table->foreign('paper_instances_id')
                   ->references('id')->on('paper_instances')

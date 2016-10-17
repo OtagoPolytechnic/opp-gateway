@@ -13,6 +13,7 @@ class CreateCheckpointUserTable extends Migration
     public function up()
     {
         Schema::create('checkpoint_user', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('checkpoint_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
@@ -20,7 +21,7 @@ class CreateCheckpointUserTable extends Migration
 
             $table->decimal('score',10,2);
 
-            $table->primary(['checkpoint_id','user_id']);
+            $table->unique(['checkpoint_id','user_id']);
 
             $table->foreign('checkpoint_id')
                   ->references('id')->on('checkpoints')

@@ -50,9 +50,15 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
         Route::post('gradebooks/{gradebook}/checkpoints', 'CheckpointController@create');
         //Get all the checkpoints for this gradebook
         Route::get('gradebooks/{gradebook}/checkpoints', 'CheckpointController@retrieve');
-        //Assign a mark to a user for a checkpoint
-        Route::post('checkpoints/{checkpoint}', 'CheckpointController@createMark');
-        
+
+
+        /**
+         * Checkpoint_user (scores)
+         */
+        //Give a student a score
+        Route::post('checkpoints/{checkpoint}', 'CheckpointController@createScore');
+        //Delete a student score
+        Route::delete('checkpoints/{checkpoint}', 'CheckpointController@deleteScore');
     });
 
     Route::any('*', function()

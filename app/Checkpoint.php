@@ -20,11 +20,22 @@ class Checkpoint extends Model
         return $this->belongsTo(Gradebook::class);
     }
 
-    public function createMark(User $user, $score)
+    public function createScore(User $user, $score)
     {
-        $checkpointMark = ['checkpoint_id'=>$this->id,
+        $checkpointScore = ['checkpoint_id'=>$this->id,
                            'user_id'=>$user->id,
                            'score'=>$score];
-        return Checkpoint_User::create($checkpointMark);
+        return Checkpoint_User::create($checkpointScore);
+    }
+
+    public function deleteScore(User $user)
+    {
+        //Find score
+        $checkpointScore = ['checkpoint_id'=>$this->id,
+                            'user_id'=>$user->id];
+
+        $cp=Checkpoint_User::where($checkpointScore)->first();
+
+        return $cp->delete();
     }
 }

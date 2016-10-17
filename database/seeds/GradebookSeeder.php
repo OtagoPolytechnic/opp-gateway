@@ -20,7 +20,7 @@ class GradebookSeeder extends Seeder
 
         //Do Y2016S1 papers
         $this->createGradebook('IN511', 'Y2016S1');
-        //Leave one of the paper instance without a gradebook
+        //Leave one of the paper instances without a gradebook
         //$this->createGradebook('IN512', 'Y2016S1');
         $this->createGradebook('IN523', 'Y2016S1');
 
