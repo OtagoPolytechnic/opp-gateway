@@ -51,8 +51,6 @@ class CheckpointController extends Controller
 
     public function createScore(Request $request, Checkpoint $checkpoint)
     {
-        $responseData = new ApiResponseData();
-
         //Get post data to build mark
         //TODO validate data?
         $score = $request->input('score');
@@ -65,20 +63,20 @@ class CheckpointController extends Controller
         if($search_for_cp->count()==1)
         {
             return response()->json(['error'=>'Score already exists'], 400);
+        } else {
+            $responseData = new ApiResponseData();
+
+            $data = $checkpoint->createScore($user, $score);
+
+            // Add the new checkpoint to the response data object
+            $responseData->addData('checkpointScore', $data);
+
+            // Return our response with our data
+            return response()->json($responseData->get());
         }
-
-        $data = $checkpoint->createScore($user, $score);
-
-        // Add the new checkpoint to the response data object
-        $responseData->addData('checkpointScore', $data);
-
-        // Return our response with our data
-        return response()->json($responseData->get());
     }
 
     public function deleteScore(Request $request, Checkpoint $checkpoint){
-        $responseData = new ApiResponseData();
-
         //Get post data
         //Find user off user id provided
         $user = User::find($request->input('user'));
@@ -89,15 +87,15 @@ class CheckpointController extends Controller
         if($search_for_cp->count()==0)
         {
             return response()->json(['error'=>'Score does not exist'], 404);
+        } else {
+            $responseData = new ApiResponseData();
+            $data = $checkpoint->deleteScore($user);
+
+            // Add the new checkpoint to the response data object
+            $responseData->addData('deleteScore', $data);
+
+            // Return our response with our data
+            return response()->json($responseData->get(), 200);
         }
-
-        $data = $checkpoint->deleteScore($user);
-
-        // Add the new checkpoint to the response data object
-        $responseData->addData('deleteScore', $data);
-
-        // Return our response with our data
-        return response()->json($responseData->get(), 200);
-        
     }
 }

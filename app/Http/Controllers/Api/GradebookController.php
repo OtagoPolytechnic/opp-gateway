@@ -15,27 +15,25 @@ class GradebookController extends Controller
 {
     public function create(Request $request)
     {
-        // Make a new API Response Data object
-        $responseData = new ApiResponseData();
-        
         //Get the paper instance to link the gradebook to
         $paper_instance_id = $request->input('paper_instance_id');
 
         //Check and see if a gradebook already exists
-        if (PaperInstance::find($paper_instance_id)->gradebook!=null)
+        if (PaperInstance::find($paper_instance_id)->gradebook != null)
         {
             return response()->json(['error'=>'Gradebook already exists'], 400);
+        } else {
+            // Make a new API Response Data object
+            $responseData = new ApiResponseData();
+            //Create the Gradebook linked to paper_instance
+            $data = Gradebook::create(['paper_instance_id'=>$paper_instance_id]);
+
+            // Add the new gradebook to the response data object
+            $responseData->addData('gradebook', $data);
+
+            // Return our response with our data
+            return response()->json($responseData->get(), 200);
         }
-
-        //Create the Gradebook linked to paper_instance
-        //if it doesn't already exist
-        $data = Gradebook::create(['paper_instance_id'=>$paper_instance_id]);
-
-        // Add the new gradebook to the response data object
-        $responseData->addData('gradebook', $data);
-
-        // Return our response with our data
-        return response()->json($responseData->get(), 200);
     }
 
     public function retrieve(Gradebook $gradebook)
