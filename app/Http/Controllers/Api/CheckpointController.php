@@ -21,11 +21,13 @@ class CheckpointController extends Controller
 
         //Get post data to build checkpoint
         //TODO validate data?
+        $name = $request->input('name');
         $weight = $request->input('weight');
+        $total = $request->input('total');
         $date = $request->input('date');
-
-        //TODO Check that a checkpoint with date doesn;t already exist?
-        $checkpoint = ['weight'=>$weight, 'date'=>$date];
+        
+        //TODO Check that a checkpoint with date doesn't already exist?
+        $checkpoint = ['name'=>$name, 'weight'=>$weight, 'total'=>$total, 'date'=>$date];
 
         $data = $gradebook->addCheckpoint($checkpoint);
 
@@ -40,6 +42,7 @@ class CheckpointController extends Controller
     {
         $responseData = new ApiResponseData();
 
+        //TODO Sort checkpoints by date?
         $data = $gradebook->checkpoints;
 
         // Add the new checkpoint to the response data object
@@ -47,55 +50,5 @@ class CheckpointController extends Controller
 
         // Return our response with our data
         return response()->json($responseData->get(), 200);
-    }
-
-    public function createScore(Request $request, Checkpoint $checkpoint)
-    {
-        //Get post data to build mark
-        //TODO validate data?
-        $score = $request->input('score');
-        //Find user off user id provided
-        $user = User::find($request->input('user'));
-
-        //Check to see if this already exists!
-        $search_for_cp = Checkpoint_User::where(['checkpoint_id'=>$checkpoint->id,
-                                                 'user_id'=>$user->id]);
-        if($search_for_cp->count()==1)
-        {
-            return response()->json(['error'=>'Score already exists'], 400);
-        } else {
-            $responseData = new ApiResponseData();
-
-            $data = $checkpoint->createScore($user, $score);
-
-            // Add the new checkpoint to the response data object
-            $responseData->addData('checkpointScore', $data);
-
-            // Return our response with our data
-            return response()->json($responseData->get());
-        }
-    }
-
-    public function deleteScore(Request $request, Checkpoint $checkpoint){
-        //Get post data
-        //Find user off user id provided
-        $user = User::find($request->input('user'));
-
-        //Check to see if this already exists!
-        $search_for_cp = Checkpoint_User::where(['checkpoint_id'=>$checkpoint->id,
-                                                 'user_id'=>$user->id]);
-        if($search_for_cp->count()==0)
-        {
-            return response()->json(['error'=>'Score does not exist'], 404);
-        } else {
-            $responseData = new ApiResponseData();
-            $data = $checkpoint->deleteScore($user);
-
-            // Add the new checkpoint to the response data object
-            $responseData->addData('deleteScore', $data);
-
-            // Return our response with our data
-            return response()->json($responseData->get(), 200);
-        }
     }
 }

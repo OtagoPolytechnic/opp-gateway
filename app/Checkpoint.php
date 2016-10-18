@@ -8,7 +8,9 @@ class Checkpoint extends Model
 {
     protected $fillable = [
         'gradebook_id',
+        'name',
         'weight',
+        'total',
         'date',
     ];
 

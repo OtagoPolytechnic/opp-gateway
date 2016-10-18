@@ -56,9 +56,10 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
          * Checkpoint_user (scores)
          */
         //Give a student a score
-        Route::post('checkpoints/{checkpoint}', 'CheckpointController@createScore');
+        Route::post('scores/{checkpoint}', 'CheckpointUserController@createScore');
         //Delete a student score
-        Route::delete('checkpoints/{checkpoint}', 'CheckpointController@deleteScore');
+        Route::delete('scores/{checkpoint}', 'CheckpointUserController@deleteScore');
+        //Route::Patch('scores/{checkpoint}', 'CheckpointUserController@patchScore');
     });
 
     Route::any('*', function()

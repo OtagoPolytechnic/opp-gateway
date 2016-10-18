@@ -35,7 +35,8 @@ class Gradebook extends Model
     * Add a new Checkpoint to this Gradebook
     */
     public function addCheckpoint($data)
-    {
+    {   
+        //TODO Data validation?
         $data['gradebook_id']=$this->id;
         return Checkpoint::create($data);
     }

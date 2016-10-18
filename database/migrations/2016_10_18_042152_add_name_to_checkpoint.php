@@ -1,9 +1,10 @@
+
 <?php
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeGradebookPaperinstanceUnique extends Migration
+class AddNameToCheckpoint extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +13,10 @@ class ChangeGradebookPaperinstanceUnique extends Migration
      */
     public function up()
     {
-        Schema::table('gradebooks', function (Blueprint $table) {
+        Schema::table('checkpoints', function (Blueprint $table) {
 
-            $table->unique('paper_instance_id');
+            $table->string('name');
+            $table->decimal('total',10,2);
         });
     }
 
@@ -25,6 +27,6 @@ class ChangeGradebookPaperinstanceUnique extends Migration
      */
     public function down()
     {
-        
+        //
     }
 }

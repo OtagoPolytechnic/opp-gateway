@@ -16,5 +16,6 @@ class VerifyCsrfToken extends BaseVerifier
     'v1/gradebooks/*',  #TODO Remove this, only added for testing purposes
     'v1/gradebooks',
     'v1/checkpoints/*',
+    'v1/scores/*',
     ];
 }
