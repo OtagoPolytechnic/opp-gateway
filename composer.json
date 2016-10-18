@@ -21,7 +21,7 @@
             "database"
         ],
         "files": [
-            "App/Defines/CalendarDefines.php"
+            "app/Defines/CalendarDefines.php"
         ],
         "psr-4": {
             "App\\": "app/",
