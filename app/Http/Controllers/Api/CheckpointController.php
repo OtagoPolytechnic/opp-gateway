@@ -24,6 +24,7 @@ class CheckpointController extends Controller
         $weight = $request->input('weight');
         $date = $request->input('date');
 
+        //TODO Check that a checkpoint with date doesn;t already exist?
         $checkpoint = ['weight'=>$weight, 'date'=>$date];
 
         $data = $gradebook->addCheckpoint($checkpoint);
@@ -32,7 +33,7 @@ class CheckpointController extends Controller
         $responseData->addData('checkpoint', $data);
 
         // Return our response with our data
-        return response()->json($responseData->get());
+        return response()->json($responseData->get(), 201);
     }
 
     public function retrieve(Gradebook $gradebook)
@@ -45,7 +46,7 @@ class CheckpointController extends Controller
         $responseData->addData('checkpoints', $data);
 
         // Return our response with our data
-        return response()->json($responseData->get());
+        return response()->json($responseData->get(), 200);
     }
 
     public function createScore(Request $request, Checkpoint $checkpoint)
@@ -63,7 +64,7 @@ class CheckpointController extends Controller
                                                  'user_id'=>$user->id]);
         if($search_for_cp->count()==1)
         {
-            return response()->json(['error'=>'Already exists'],400);
+            return response()->json(['error'=>'Score already exists'], 400);
         }
 
         $data = $checkpoint->createScore($user, $score);
@@ -87,7 +88,7 @@ class CheckpointController extends Controller
                                                  'user_id'=>$user->id]);
         if($search_for_cp->count()==0)
         {
-            return response()->json(['error'=>'Score does not exist'],404);
+            return response()->json(['error'=>'Score does not exist'], 404);
         }
 
         $data = $checkpoint->deleteScore($user);
@@ -96,7 +97,7 @@ class CheckpointController extends Controller
         $responseData->addData('deleteScore', $data);
 
         // Return our response with our data
-        return response()->json($responseData->get());
+        return response()->json($responseData->get(), 200);
         
     }
 }
