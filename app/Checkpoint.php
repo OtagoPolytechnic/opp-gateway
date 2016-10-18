@@ -40,4 +40,5 @@ class Checkpoint extends Model
 
         return $cp->delete();
     }
+    //TODO place patchScore in here!
 }
