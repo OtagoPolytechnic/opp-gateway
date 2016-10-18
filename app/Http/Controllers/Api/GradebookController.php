@@ -22,7 +22,7 @@ class GradebookController extends Controller
 
         //Create the Gradebook linked to paper_instance
         //if it doesn't already exist
-        $data = Gradebook::firstOrCreate(['paper_instances_id'=>$paper_instance_id]);
+        $data = Gradebook::firstOrCreate(['paper_instance_id'=>$paper_instance_id]);
 
         // Add the new gradebook to the response data object
         $responseData->addData('gradebook', $data);

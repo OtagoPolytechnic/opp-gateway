@@ -16,9 +16,9 @@ class CreateGradebooksTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->integer('paper_instances_id')->unsigned();
+            $table->integer('paper_instance_id')->unsigned();
 
-            $table->foreign('paper_instances_id')
+            $table->foreign('paper_instance_id')
                   ->references('id')->on('paper_instances')
                   ->onDelete('cascade');
         });

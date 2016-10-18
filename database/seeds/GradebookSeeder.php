@@ -51,7 +51,7 @@ class GradebookSeeder extends Seeder
         $date_block_id = DateBlock::where('name', $date_block)->value('id');
 
         //Create Gradebook
-            Gradebook::create(['paper_instances_id' =>
+            Gradebook::create(['paper_instance_id' =>
             PaperInstance::where('paper_id', $paper_id)->
                            where('date_block_id' , $date_block_id)->value('id')
             ]);

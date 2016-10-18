@@ -9,7 +9,7 @@ use App\Checkpoint;
 class Gradebook extends Model
 {
     protected $fillable = [
-        'paper_instances_id',
+        'paper_instance_id',
     ];
     
     //TODO Do we need this?

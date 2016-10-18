@@ -14,7 +14,7 @@ class ChangeGradebookPaperinstanceUnique extends Migration
     {
         Schema::table('gradebooks', function (Blueprint $table) {
 
-            $table->unique('paper_instances_id');
+            $table->unique('paper_instance_id');
         });
     }
 
