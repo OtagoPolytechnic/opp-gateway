@@ -20,7 +20,7 @@ class PaperInstanceController extends Controller
         
         $resourceData = $paperInstance->resources()->select(['id', 'name', 'url'])->get();
         // Add the papers to the response data object
-        $responseData->addData('resources', $resourceData)->toArray();
+        $responseData->addData('resources', $resourceData->toArray());
 
         // Return our response with our data
         return response()->json($responseData->get());    

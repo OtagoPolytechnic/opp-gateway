@@ -8,8 +8,8 @@ import 'whatwg-fetch';
 import App from './App';
 
 // Pages
-import HomePage from './Pages/HomePage';
-import MyPapersPage from './Pages/MyPapersPage';
+import HomePage from './pages/HomePage';
+import MyPapersPage from './pages/MyPapersPage';
 
 ReactDOM.render(
     <Router history={browserHistory}>
