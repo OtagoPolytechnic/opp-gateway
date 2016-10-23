@@ -17,8 +17,11 @@ class UserSeeder extends Seeder
         User::truncate();
 
 
-        User::create(['first_name' => 'John', 'last_name' => 'Smith', 'email' => 'john.smith@example.com']);
+       /* User::create(['first_name' => 'John', 'last_name' => 'Smith', 'email' => 'john.smith@example.com']);
         User::create(['first_name' => 'Mary', 'last_name' => 'Jackson', 'email' => 'mary.jackson@example.com']);
-        User::create(['first_name' => 'Aaron', 'last_name' => 'Martin', 'email' => 'aaron.martin@example.com']);
+        User::create(['first_name' => 'Aaron', 'last_name' => 'Martin', 'email' => 'aaron.martin@example.com']);*/
+
+        //Seed 40 random users
+        factory(App\User::class, 40)->create();
     }
 }
