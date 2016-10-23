@@ -34,7 +34,7 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
          * Users
          */
         Route::get('users', 'UserController@all');
-        Route::get('users/{user_id}/papers', 'UserController@papers');
+        Route::get('users/{user}/papers', 'UserController@papers');
 
         //End overwrite
 
