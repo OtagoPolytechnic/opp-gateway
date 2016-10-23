@@ -25,4 +25,18 @@ class UserController extends Controller
         // Return our response with our data
         return response()->json($responseData->get());
     }
+
+     public function papers(User $user)
+    {
+         $responseData = new ApiResponseData();
+         $groups = (string) $user->groups();
+         echo($groups);
+
+        
+
+
+         //$UserpaperInstances = $groups->paperInstances()->select('paper_id', 'date_block_id',
+        //'lecturer_group_id')->get();
+         //$responseData->addData('User_PaperInstances', $UserpaperInstances->toArray());
+    }
 }

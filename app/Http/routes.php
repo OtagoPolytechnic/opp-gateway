@@ -23,12 +23,18 @@ Route::group(['before' => 'api', 'namespace' => 'Api'], function()
          * Papers
          */
         Route::get('papers', 'PaperController@all');
+        Route::get('papers/{paper}/instances', 'PaperController@instances');
+
+        /**
+         * Paper Instances
+         */
+        Route::get('paper-instances/{paperInstance}/resources', 'PaperInstanceController@resources');
 
         /**
          * Users
          */
         Route::get('users', 'UserController@all');
-        Route::get('users/{user_id}/papers', 'UserController@all');
+        Route::get('users/{user_id}/papers', 'UserController@papers');
 
         //End overwrite
 

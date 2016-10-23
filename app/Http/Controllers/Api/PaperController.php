@@ -25,4 +25,19 @@ class PaperController extends Controller
         // Return our response with our data
         return response()->json($responseData->get());
     }
+
+    /** Find the paper instances for the given paper
+    * @param $paper Particular paper
+    * @return All paper-instances for the given paper
+    */
+    public function instances(Paper $paper)
+    {
+        $responseData = new ApiResponseData();
+        //$paperInstances = $paper->instances->select(['id', ''])->get();
+        $paperInstances = $paper->instances()->select('paper_id', 'date_block_id',
+        'lecturer_group_id')->get();
+        $responseData->addData('paper_instances', $paperInstances->toArray());
+        // Return our response with our data
+        return response()->json($responseData->get());
+    }
 }
