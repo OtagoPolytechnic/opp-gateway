@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\PaperInstance;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponseData;
@@ -25,18 +26,18 @@ class UserController extends Controller
         // Return our response with our data
         return response()->json($responseData->get());
     }
-
-    public function papers(User $user)
+    
+     public function papers(User $user)
     {
          $responseData = new ApiResponseData();
-
          $groups = $user->groups;
+         
+         $papers=$groups->map(function ($group){ return $group->paperInstance->paper;});
+         
+        $responseData->addData('User_PaperInstances', $papers->toArray());
 
-         $UserpaperInstances = $groups->paperInstances()->select('paper_id', 'date_block_id',
-        'lecturer_group_id')->get();
-
-
-         $responseData->addData('User_PaperInstances', $UserpaperInstances->toArray());
+        // Return our response with our data
+        return response()->json($responseData->get());
 
     }
 }

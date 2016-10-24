@@ -35,18 +35,39 @@ class PaperInstance extends Model
         return $this->belongsTo(DateBlock::class);
     }
 
+    /**
+    * Get the lecturers group
+    */
     public function lecturersGroup()
     {
         return $this->hasOne(Group::class, 'id', 'lecturer_group_id');
     }
 
+    /**
+    * Get all groups linked to this paper_instance
+    */
     public function groups()
     {
         return $this->hasMany(Group::class);
     }
 
     /**
-     * Creates a new resource for this paper
+    * Get the student groups(all groups except the lecturers group)
+    */
+    public function studentsGroups(){
+        return $this->hasMany(Group::class)->where('id', '!=', $this->lecturer_group_id);
+    }
+
+    /**
+    * Get Gradebook for this PaperInstance
+    */
+    public function gradebook()
+    {
+        return $this->hasOne(Gradebook::class);
+    }
+
+    /**
+     * Creates a new resource for this PaperInstance
      */
     public function createResource($data)
     {

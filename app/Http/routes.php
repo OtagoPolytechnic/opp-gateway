@@ -18,6 +18,7 @@ Route::group(['before' => 'www.api', 'namespace' => 'Api'], function()
 {
     Route::group(['prefix' => 'v1'], function()
     {
+        //TODO This to be overwritten by merge
         /**
          * Papers
          */
@@ -33,7 +34,40 @@ Route::group(['before' => 'www.api', 'namespace' => 'Api'], function()
          * Users
          */
         Route::get('users', 'UserController@all');
-        Route::get('users/{user}/paper-instances', 'UserController@papers');
+
+        Route::get('users/{user}/papers', 'UserController@papers');
+
+        //End overwrite
+
+        //New stuff by Arron and Josh
+        /**
+         * Gradebooks
+         */
+
+        //Create a new gradebook(or return existing)
+        Route::post('gradebooks', 'GradebookController@create');
+
+        //Retrieve a particular Gradebook
+        Route::get('gradebooks/{gradebook}', 'GradebookController@retrieve');
+
+        /**
+         * Checkpoints
+         */
+        //Create a new checkpoint
+        Route::post('gradebooks/{gradebook}/checkpoints', 'CheckpointController@create');
+        //Get all the checkpoints for this gradebook
+        Route::get('gradebooks/{gradebook}/checkpoints', 'CheckpointController@retrieve');
+
+
+        /**
+         * Checkpoint_user (scores)
+         */
+        //Give a student a score
+        Route::post('scores/{checkpoint}', 'CheckpointUserController@createScore');
+        //Delete a student score
+        Route::delete('scores/{checkpoint}', 'CheckpointUserController@deleteScore');
+        Route::patch('scores/{checkpoint}', 'CheckpointUserController@patchScore');
+
     });
 
     Route::any('*', function()

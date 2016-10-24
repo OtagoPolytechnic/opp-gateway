@@ -37,12 +37,9 @@ class PaperController extends Controller
         //$paperInstances = $paper->instances->select(['id', ''])->get();
         $paperInstances = $paper->instances()->select('paper_id', 'date_block_id',
         'lecturer_group_id')->get();
-
         $responseData->addData('paper_instances', $paperInstances->toArray());
-
         // Return our response with our data
         return response()->json($responseData->get());
     }
 
-     
 }

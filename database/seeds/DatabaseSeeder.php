@@ -7,7 +7,7 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     * use 'composer dump-autoload' when adding a new seeder!
      * @return void
      */
     public function run()
@@ -19,6 +19,17 @@ class DatabaseSeeder extends Seeder
         $this->call(PaperSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(DateBlockSeeder::class);
+        $this->call(PaperInstanceSeeder::class);
+        $this->call(GradebookSeeder::class);
+
+        $this->call(CheckpointSeeder::class);
+
+        //TODO Create a few checkpoint_user marks
+        //TODO Create a few resources
+
+        $this->call(GroupSeeder::class);
+        $this->call(Group_RoleSeeder::class);
 
         // Set the DB back to normal
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
