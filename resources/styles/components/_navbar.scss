@@ -16,3 +16,22 @@ i.menu-draw-toggle {
     font-weight: 300;
     color: white;
 }
+
+.page-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    margin-top: 0;
+    margin-bottom: 30px;
+    background: lighten($colour-dark, 45%);
+    color: white;
+    height: $navbar-height;
+    transition: $menu-draw-transition;
+    z-index: 100;
+    font-size: 30px;
+    padding: 5px 15px;
+
+    .menu-draw-collpased & {
+        transition: $menu-draw-transition;
+    }
+}

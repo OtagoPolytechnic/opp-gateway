@@ -48,7 +48,7 @@ export default React.createClass({
     render() {
         return (
             <div>
-                <div className="page-title">
+                <div className="page-header">
                     Calendar
                 </div>
 

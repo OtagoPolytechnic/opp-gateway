@@ -26595,85 +26595,91 @@ exports.default = _react2.default.createClass({
             { className: this.state.menuCollapsed ? 'menu-draw-collpased' : '' },
             _react2.default.createElement(
                 'nav',
-                { className: 'menu-draw' },
+                { className: 'navbar navbar-inverse navbar-fixed-top' },
+                _react2.default.createElement('i', { className: 'fa fa-bars menu-draw-toggle', onClick: this.menuButtonClicked }),
                 _react2.default.createElement(
-                    'nav',
-                    { className: 'menu-header' },
-                    _react2.default.createElement('i', { className: 'fa fa-bars menu-draw-toggle', onClick: this.menuButtonClicked }),
+                    'div',
+                    { className: 'navbar-header' },
                     _react2.default.createElement(
                         'a',
                         { className: 'navbar-brand', href: '#' },
                         'OPP Gateway'
                     )
-                ),
+                )
+            ),
+            _react2.default.createElement(
+                'nav',
+                { className: 'menu-draw' },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'menu-draw-section' },
+                    'ul',
+                    null,
                     _react2.default.createElement(
-                        'ul',
+                        'li',
                         null,
                         _react2.default.createElement(
-                            'li',
-                            null,
-                            _react2.default.createElement(
-                                _NavLink2.default,
-                                { to: '/', onlyActiveOnIndex: true },
-                                _react2.default.createElement('i', { className: 'fa fa-home', 'aria-hidden': 'true' }),
-                                ' Home'
-                            )
-                        ),
+                            _NavLink2.default,
+                            { to: '/', onlyActiveOnIndex: true },
+                            _react2.default.createElement('i', { className: 'fa fa-home', 'aria-hidden': 'true' }),
+                            ' Home'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        null,
                         _react2.default.createElement(
-                            'li',
-                            null,
-                            _react2.default.createElement(
-                                _NavLink2.default,
-                                { to: '/calendar' },
-                                _react2.default.createElement('i', { className: 'fa fa-calendar', 'aria-hidden': 'true' }),
-                                ' Calendar'
-                            )
-                        ),
+                            _NavLink2.default,
+                            { to: '/calendar' },
+                            _react2.default.createElement('i', { className: 'fa fa-calendar', 'aria-hidden': 'true' }),
+                            ' Calendar'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        null,
                         _react2.default.createElement(
-                            'li',
-                            null,
-                            _react2.default.createElement(
-                                _NavLink2.default,
-                                { to: '/my-papers' },
-                                _react2.default.createElement('i', { className: 'fa fa-leanpub', 'aria-hidden': 'true' }),
-                                ' My Papers'
-                            )
+                            _NavLink2.default,
+                            { to: '/my-papers' },
+                            _react2.default.createElement('i', { className: 'fa fa-leanpub', 'aria-hidden': 'true' }),
+                            ' My Papers'
                         )
                     )
                 ),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'menu-draw-section' },
+                    'span',
+                    { className: 'menu-section-title' },
+                    'Handy Links'
+                ),
+                _react2.default.createElement(
+                    'ul',
+                    null,
                     _react2.default.createElement(
-                        'span',
-                        { className: 'menu-section-title' },
-                        'Handy Links'
-                    ),
-                    _react2.default.createElement(
-                        'ul',
+                        'li',
                         null,
                         _react2.default.createElement(
-                            'li',
-                            null,
-                            _react2.default.createElement(
-                                'a',
-                                { href: 'http://gitlab.op-bit.nz' },
-                                _react2.default.createElement('i', { className: 'fa fa-code-fork', 'aria-hidden': 'true' }),
-                                ' GitLab'
-                            )
-                        ),
+                            'a',
+                            { href: 'http://gitlab.op-bit.nz' },
+                            _react2.default.createElement('i', { className: 'fa fa-code-fork', 'aria-hidden': 'true' }),
+                            ' GitLab'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        null,
                         _react2.default.createElement(
-                            'li',
-                            null,
-                            _react2.default.createElement(
-                                'a',
-                                { href: 'https://mattermost.op-bit.nz/op-bit/' },
-                                _react2.default.createElement('i', { className: 'fa fa-comment', 'aria-hidden': 'true' }),
-                                ' Mattermost'
-                            )
+                            'a',
+                            { href: 'https://mattermost.op-bit.nz/op-bit/' },
+                            _react2.default.createElement('i', { className: 'fa fa-comment', 'aria-hidden': 'true' }),
+                            ' Mattermost'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                            'a',
+                            { href: 'https://google.com' },
+                            _react2.default.createElement('i', { className: 'fa fa-barcode', 'aria-hidden': 'true' }),
+                            ' CICO'
                         )
                     )
                 )
@@ -26681,9 +26687,15 @@ exports.default = _react2.default.createClass({
             _react2.default.createElement(
                 'div',
                 { className: 'main-container' },
-                this.props.children
+                _react2.default.createElement(
+                    'div',
+                    { className: 'main-content' },
+                    this.props.children
+                )
             )
         );
+
+        {/* EXTERNAL LINKS */}
     }
 });
 
@@ -26754,7 +26766,7 @@ exports.default = _react2.default.createClass({
             null,
             _react2.default.createElement(
                 'div',
-                { className: 'page-title' },
+                { className: 'page-header' },
                 'Calendar'
             ),
             _react2.default.createElement(
@@ -26787,7 +26799,7 @@ exports.default = _react2.default.createClass({
             null,
             _react2.default.createElement(
                 "h2",
-                { className: "page-title" },
+                { className: "page-header" },
                 "Home"
             ),
             _react2.default.createElement("div", { className: "main-content" })
@@ -26816,7 +26828,7 @@ exports.default = _react2.default.createClass({
             null,
             _react2.default.createElement(
                 "h2",
-                { className: "page-title" },
+                { className: "page-header" },
                 "My Papers"
             ),
             _react2.default.createElement("div", { className: "main-content" })

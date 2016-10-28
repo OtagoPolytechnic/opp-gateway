@@ -43,35 +43,33 @@
         margin-left: -#{$menu-draw-width};
     }
 
-    .menu-draw-section {
-        border-left: 4px solid $colour-primary;
-        margin-top: 30px;
+    .menu-section-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        display: block;
+        padding: 8px;
+    }
 
-        .menu-section-title {
-            font-size: 1.2em;
-            // text-align: center;
-            font-weight: bold;
-            display: block;
-            padding: 8px;
-        }
-    
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    ul {
+        list-style-type: none;
+        padding: 15px 0 0;
+    }
 
-        li {
-            padding: 8px 0;
-            font-size: 1.3em;
-        }
+    .menu-section-title + ul {
+        padding-top: 0;
+    }
 
-        i {
-            padding: 0 15px;
-            margin-left: 5px;
-            height: 1em;
-            width: 2.5em;
-            text-align: center;
-        }
+    li {
+        padding: 8px 5px;
+        font-size: 1.3em;
+    }
+
+    i {
+        padding: 0 15px;
+        margin-left: 5px;
+        height: 1em;
+        width: 2.5em;
+        text-align: center;
     }
 }
 

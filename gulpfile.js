@@ -13,18 +13,21 @@ var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 
 // Paths
-var scssSource       = './resources/styles/**/*.scss';
-var cssDestination   = './public/css/';
+var paths = {
+    cssDest: './public/css/',
+    scss: './resources/styles/**/*.scss',
+    react: './resources/react/*.jsx'
+};
 
 // Styles task (SCSS)
 gulp.task('styles', function() {
-    return gulp.src(scssSource)
+    return gulp.src(paths.scss)
                .pipe(sass({ errLogToConsole: true }))
                .pipe(autoprefixer('last 2 versions', 'ie 9', 'ios 6', 'android 4'))
-               .pipe(gulp.dest(cssDestination))
+               .pipe(gulp.dest(paths.cssDest))
                .pipe(rename({ suffix: '.min' }))
                .pipe(minifycss())
-               .pipe(gulp.dest(cssDestination));
+               .pipe(gulp.dest(paths.cssDest));
 });
 
 // React task
@@ -38,10 +41,8 @@ gulp.task('react', function() {
 
 // Watch gulp task
 gulp.task('watch', function() {
-    return gulp.watch(
-        [scssSource, './resources/react/*.jsx'], // Watch these directories
-        ['styles', 'react'] // Run these commands
-    );
+    gulp.watch(paths.scss, ['styles']);
+    gulp.watch(paths.react, ['react']);
 });
 
 // Default gulp task

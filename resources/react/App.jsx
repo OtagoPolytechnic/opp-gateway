@@ -17,16 +17,16 @@ export default React.createClass({
     render() {
         return (
             <div className={this.state.menuCollapsed ? 'menu-draw-collpased' : ''}>
-                {/* MENU DRAW */}
-                <nav className="menu-draw">
-                    {/* NAV BRAND/HAMBURGER BUTTON */}
-                    <nav className="menu-header">
+                    {/* MAIN NAV */}
+                    <nav className="navbar navbar-inverse navbar-fixed-top">
                         <i className="fa fa-bars menu-draw-toggle" onClick={this.menuButtonClicked}></i>
-                        <a className="navbar-brand" href="#">OPP Gateway</a>
+                        <div className="navbar-header">
+                            <a className="navbar-brand" href="#">OPP Gateway</a>
+                        </div>
                     </nav>
 
-                    {/* MENU */}
-                    <div className="menu-draw-section">
+                    {/* MENU DRAW */}
+                    <nav className="menu-draw">
                         <ul>
                             <li>
                                 <NavLink to="/" onlyActiveOnIndex={true}>
@@ -44,10 +44,6 @@ export default React.createClass({
                                 </NavLink>
                             </li>
                         </ul>
-                    </div>
-
-                    {/* EXTERNAL LINKS */}
-                    <div className="menu-draw-section">
                         <span className="menu-section-title">Handy Links</span>
                         <ul>
                             <li>
@@ -60,15 +56,24 @@ export default React.createClass({
                                     <i className="fa fa-comment" aria-hidden="true"></i> Mattermost
                                 </a>
                             </li>
+                            <li>
+                                <a href="https://google.com">
+                                    <i className="fa fa-barcode" aria-hidden="true"></i> CICO
+                                </a>
+                            </li>
                         </ul>
-                    </div>
-                </nav>
+                    </nav>
 
-                {/* MAIN CONTENT CONTAINER */}
-                <div className="main-container">
-                    {this.props.children}
+                    {/* MAIN CONTENT CONTAINER */}
+                    <div className="main-container">
+                        <div className="main-content">
+                            {this.props.children}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        )
+            );
+
+                    {/* EXTERNAL LINKS */}
+                    
     }
 })

@@ -5,7 +5,7 @@ export default React.createClass({
     render() {
         return (
             <div>
-                <h2 className="page-title">My Papers</h2>
+                <h2 className="page-header">My Papers</h2>
 
                 <div className="main-content">
                 </div>
