@@ -9,20 +9,52 @@ export default React.createClass({
         };
     },
 
-    componentDidMount: function() {
-        // this.fetchEventsRequest = this.fetchEvents(1);
+    componentDidMount() {
+        this.fetchEventsRequest = this.fetchEvents(1);
     },
 
-    componentWillUnmount: function() {
-        // this.fetchEventsRequest.abort();
+    componentWillUnmount() {
+        this.fetchEventsRequest.abort();
+    },
+
+    fetchEvents: function(userId) {
+        $.ajax({
+            url: 'http://api.gateway.dev/v1/users/' + userId + '/events',
+            success: (data) => {
+                let events = [];
+                data = data['data']['events'];
+                
+                data.map((event) =>
+                {
+                    let start = new moment(event['start_time']);
+                    let duration = event['duration'];
+                    let end = start.add(duration, 'minutes');
+
+                    events.push(
+                        {
+                            title: event['event_name'],
+                            start: start.toDate(),
+                            end: end.toDate(),
+                            color: '#' + event['colour']
+                        }
+                    )
+                });
+
+                this.setState({ events });
+            }
+        });
     },
     
     render() {
         return (
             <div>
-                <h2 className="page-title">Calendar</h2>
+                <div className="page-header">
+                    Calendar
+                </div>
 
-                <Calendar events={this.state.events} />
+                <div className="main-content">
+                    <Calendar events={this.state.events} />
+                </div>
             </div>
         );
     }

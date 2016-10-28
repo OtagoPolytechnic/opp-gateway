@@ -2,18 +2,65 @@
     position: fixed;
     width: $menu-draw-width;
     height: 100%;
-    background: #eee;
-    top: 53px;
+    background: $menu-draw-background;
     transition: $menu-draw-transition;
+
+    .menu-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: $colour-dark;
+        width: $menu-draw-width;
+        height: $navbar-height;
+        transition: $menu-draw-transition;
+
+        i {
+            position: fixed;
+            width: $navbar-height;
+            height: $navbar-height;
+            background: $colour-dark;
+        }
+
+        .navbar-brand {
+            padding-left: 1em;
+            transition: $menu-draw-transition;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .menu-draw-collpased & {
+            width: 60px;
+            transition: $menu-draw-transition;
+
+            .navbar-brand {
+                margin-left: calc(-#{$menu-draw-width} + 60px);
+                transition: $menu-draw-transition;
+            }
+        }
+    }
+
+    .menu-draw-collpased & {
+        margin-left: -#{$menu-draw-width};
+    }
+
+    .menu-section-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        display: block;
+        padding: 8px;
+    }
 
     ul {
         list-style-type: none;
-        padding: 0;
-        margin-top: 30px;
+        padding: 15px 0 0;
+    }
+
+    .menu-section-title + ul {
+        padding-top: 0;
     }
 
     li {
-        padding: 8px 0;
+        padding: 8px 5px;
         font-size: 1.3em;
     }
 
@@ -23,10 +70,6 @@
         height: 1em;
         width: 2.5em;
         text-align: center;
-    }
-
-    .menu-draw-collpased & {
-        margin-left: -#{$menu-draw-width};
     }
 }
 

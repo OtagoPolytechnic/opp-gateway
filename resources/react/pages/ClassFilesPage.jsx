@@ -37,7 +37,7 @@ export default React.createClass({
                             name: task.name
                         }
                     );
-                }
+                });
 
                 this.setState({ repos });
             });
@@ -46,9 +46,11 @@ export default React.createClass({
     render() {
         return (
             <div>
-                <h2 className="page-title">Class materials</h2>
+                <h2 className="page-header">Class materials</h2>
                 
-                <RepoList repos={this.state.repos} />
+                <div className="main-content">
+                    <RepoList repos={this.state.repos} />
+                </div>
             </div>
         );
     }

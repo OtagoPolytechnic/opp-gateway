@@ -62,4 +62,13 @@ class Calendar extends Model
     {
         return $this->hasMany(Event::class);
     }
+
+    /**
+     * Add an event to this calendar
+     */
+    public function addEvent($data)
+    {
+        $data['calendar_id'] = $this->id;
+        $this->events()->create($data);
+    }
 }

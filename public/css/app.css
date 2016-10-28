@@ -1,20 +1,47 @@
-.page-title {
-  margin-top: 0;
-  margin-bottom: 30px; }
-
 .menu-draw {
   position: fixed;
   width: 250px;
   height: 100%;
-  background: #eee;
-  top: 53px;
+  background: #eaeaea;
   transition: 0.5s ease; }
+  .menu-draw .menu-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #222;
+    width: 250px;
+    height: 52px;
+    transition: 0.5s ease; }
+    .menu-draw .menu-header i {
+      position: fixed;
+      width: 52px;
+      height: 52px;
+      background: #222; }
+    .menu-draw .menu-header .navbar-brand {
+      padding-left: 1em;
+      transition: 0.5s ease;
+      color: white;
+      font-size: 1.5em; }
+    .menu-draw-collpased .menu-draw .menu-header {
+      width: 60px;
+      transition: 0.5s ease; }
+      .menu-draw-collpased .menu-draw .menu-header .navbar-brand {
+        margin-left: calc(-250px + 60px);
+        transition: 0.5s ease; }
+  .menu-draw-collpased .menu-draw {
+    margin-left: -250px; }
+  .menu-draw .menu-section-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    display: block;
+    padding: 8px; }
   .menu-draw ul {
     list-style-type: none;
-    padding: 0;
-    margin-top: 30px; }
+    padding: 15px 0 0; }
+  .menu-draw .menu-section-title + ul {
+    padding-top: 0; }
   .menu-draw li {
-    padding: 8px 0;
+    padding: 8px 5px;
     font-size: 1.3em; }
   .menu-draw i {
     padding: 0 15px;
@@ -22,8 +49,6 @@
     height: 1em;
     width: 2.5em;
     text-align: center; }
-  .menu-draw-collpased .menu-draw {
-    margin-left: -250px; }
 
 .navbar {
   margin-bottom: 0; }
@@ -41,6 +66,22 @@ i.menu-draw-toggle {
   font-weight: 300;
   color: white; }
 
+.page-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  margin-top: 0;
+  margin-bottom: 30px;
+  background: #959595;
+  color: white;
+  height: 52px;
+  transition: 0.5s ease;
+  z-index: 100;
+  font-size: 30px;
+  padding: 5px 15px; }
+  .menu-draw-collpased .page-header {
+    transition: 0.5s ease; }
+
 body {
   font-family: 'Open Sans', sans-serif; }
 
@@ -50,7 +91,6 @@ a {
 .main-container {
   width: calc(100% - 250px);
   margin-left: 250px;
-  margin-top: 50px;
   transition: 0.5s ease; }
   .menu-draw-collpased .main-container {
     width: 100%;
@@ -60,4 +100,5 @@ a {
   border-radius: 0; }
 
 .main-content {
-  padding: 30px; }
+  padding: 30px;
+  margin-top: 52px; }
