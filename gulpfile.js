@@ -1,49 +1,87 @@
-// Gulp
+var source = require('vinyl-source-stream');
 var gulp = require('gulp');
-
-// SCSS
+var gutil = require('gulp-util');
+var browserify = require('browserify');
+var reactify = require('reactify');
+var babelify = require('babelify');
+var watchify = require('watchify');
+var notify = require('gulp-notify');
+var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var minifycss = require('gulp-minify-css');
-var rename = require('gulp-rename');
 
-// React
-var browserify = require('browserify');
-var babelify = require('babelify');
-var source = require('vinyl-source-stream');
-
-// Paths
 var paths = {
+    sassFiles: './resources/styles/**/*.scss',
+    reactSource: './resources/react/',
+    reactEntry: './resources/react/index.jsx',
     cssDest: './public/css/',
-    scss: './resources/styles/**/*.scss',
-    react: './resources/react/*.jsx'
+    jsDest: './public/js/',
 };
 
-// Styles task (SCSS)
-gulp.task('styles', function() {
-    return gulp.src(paths.scss)
+function handleErrors() {
+    var args = Array.prototype.slice.call(arguments);
+
+    notify.onError({
+        title: 'Compile Error',
+        message: '<%= error.message %>'
+    }).apply(this, args);
+
+    this.emit('end'); // Keep gulp from hanging on this task
+}
+
+function buildScript(watch) {
+    var props = {
+        entries: [paths.reactEntry],
+        extensions: ['.js', '.jsx'],
+        debug: true,
+        transform: [babelify, reactify]
+    };
+
+    // watchify() if watch requested, otherwise run browserify() once 
+    var bundler = watch ? watchify(browserify(props)) : browserify(props);
+
+    function rebundle() {
+        var stream = bundler.bundle();
+        
+        return stream
+            .on('error', handleErrors)
+            .pipe(source('bundle.js'))
+            .pipe(gulp.dest(paths.jsDest))
+            .pipe(notify('React build complete'));
+    }
+
+    // listen for an update and run rebundle
+    bundler.on('update', function() {
+        rebundle();
+        gutil.log('Rebundle...');
+    });
+
+    // run it once the first time buildScript is called
+    return rebundle();
+}
+
+function sass() {
+    return gulp.src(paths.sassFiles)
                .pipe(sass({ errLogToConsole: true }))
                .pipe(autoprefixer('last 2 versions', 'ie 9', 'ios 6', 'android 4'))
                .pipe(gulp.dest(paths.cssDest))
                .pipe(rename({ suffix: '.min' }))
                .pipe(minifycss())
                .pipe(gulp.dest(paths.cssDest));
+}
+
+gulp.task('sass', function() {
+    sass();
 });
 
-// React task
+// run once
 gulp.task('react', function() {
-    return browserify('./resources/react/index.jsx', {extensions: ['.js', '.jsx']})
-            .transform(babelify, {presets: ['es2015', 'react']})
-            .bundle()
-            .pipe(source('bundle.js'))
-            .pipe(gulp.dest('./public/js/'));
+    return buildScript(false);
 });
 
-// Watch gulp task
-gulp.task('watch', function() {
-    gulp.watch(paths.scss, ['styles']);
-    gulp.watch(paths.react, ['react']);
+// run 'scripts' task first, then watch for future changes
+gulp.task('default', ['react', 'sass'], function() {
+    gulp.watch(paths.sassFiles, ['sass']);
+    return buildScript(true);
 });
-
-// Default gulp task
-gulp.task('default', ['styles', 'react']);

@@ -72,8 +72,5 @@ export default React.createClass({
                     </div>
                 </div>
             );
-
-                    {/* EXTERNAL LINKS */}
-                    
     }
 })
