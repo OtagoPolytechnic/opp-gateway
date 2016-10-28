@@ -1,29 +1,25 @@
 import React from 'react';
 import Calendar from '../components/Calendar';
-import 'whatwg-fetch';
+import axios from 'axios';
 
-export default React.createClass({
-    getInitialState() {
-        return {
+export default class CalendarPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             'events': []
-        };
-    },
+        }
+    }
 
     componentDidMount() {
-        this.fetchEventsRequest = this.fetchEvents(1);
-    },
+        this.fetchEvents(1);
+    }
 
-    componentWillUnmount() {
-        this.fetchEventsRequest.abort();
-    },
-
-    fetchEvents: function(userId) {
-        $.ajax({
-            url: 'http://api.gateway.dev/v1/users/' + userId + '/events',
-            success: (data) => {
+    fetchEvents(userId) {
+        axios.get('http://api.gateway.dev/v1/users/' + userId + '/events')
+            .then((response) => {
                 let events = [];
-                data = data['data']['events'];
-                
+                let data = response.data.data.events;
+
                 data.map((event) =>
                 {
                     let start = new moment(event['start_time']);
@@ -41,9 +37,8 @@ export default React.createClass({
                 });
 
                 this.setState({ events });
-            }
-        });
-    },
+             });
+    }
     
     render() {
         return (
@@ -58,4 +53,4 @@ export default React.createClass({
             </div>
         );
     }
-});
+}

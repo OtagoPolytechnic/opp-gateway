@@ -14,6 +14,10 @@ class Calendar extends Model
         'name',
         'colour',
     ];
+
+    protected $hidden = [
+        'pivot'
+    ];
     
     /**
      * Override the create method so we can automatically subscribe the owner
