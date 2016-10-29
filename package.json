@@ -22,8 +22,11 @@
   },
   "dependencies": {
     "axios": "^0.15.2",
+    "input-moment": "^0.3.0",
+    "moment": "^2.15.2",
     "react": "^15.3.0",
     "react-bootstrap": "^0.30.5",
+    "react-datetime": "^2.6.2",
     "react-dom": "^15.3.0",
     "react-gateway": "^2.3.0",
     "react-router": "^2.4.1"

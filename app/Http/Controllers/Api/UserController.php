@@ -53,7 +53,7 @@ class UserController extends Controller
         $responseData = new ApiResponseData();
         
         // Get all this user's subscribed calendars
-        $calendars = $user->subscribedCalendars()->select('owner_id', 'name', 'colour')->get();
+        $calendars = $user->subscribedCalendars()->select('id', 'owner_id', 'name', 'colour')->get();
 
         foreach ($calendars as $calendar) {
             $calendar['owned_by_user'] = $calendar['owner_id'] == $user->id;

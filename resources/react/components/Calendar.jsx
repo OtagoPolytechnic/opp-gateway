@@ -22,7 +22,9 @@ export default React.createClass({
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
-            events: this.props.events
+            events: this.props.events,
+            selectable: true,
+            select: this.props.rangeSelected
         });
     },
 

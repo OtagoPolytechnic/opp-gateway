@@ -66,9 +66,7 @@ export default React.createClass({
 
                     {/* MAIN CONTENT CONTAINER */}
                     <div className="main-container">
-                        <div className="main-content">
-                            {this.props.children}
-                        </div>
+                        {this.props.children}
                     </div>
                 </div>
             );

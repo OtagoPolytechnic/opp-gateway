@@ -1,6 +1,6 @@
 import React from 'react';
 import Calendar from '../components/Calendar';
-import AddEvent from '../components/AddEvent';
+import CreateEventModal from '../components/CreateEventModal';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
@@ -10,7 +10,9 @@ export default class CalendarPage extends React.Component {
         this.state = {
             'events': [],
             'calendars': [],
-            showCreateEventModal: false
+            showCreateEventModal: false,
+            createStartTime: null,
+            createEndTime: null
         }
     }
 
@@ -53,6 +55,7 @@ export default class CalendarPage extends React.Component {
 
                 data.map((calendar) =>{
                     calendars.push({
+                        id: calendar.id,
                         name: calendar.name,
                         colour: calendar.colour,
                         ownedByUser: calendar.owned_by_user
@@ -66,21 +69,36 @@ export default class CalendarPage extends React.Component {
     toggleCreateEventModal(visible) {
         this.setState({ showCreateEventModal: visible });
     }
+
+    calendarRangeSelected(start, end) {
+        this.setState({
+            createStartTime: start,
+            createEndTime: end
+        });
+
+        this.toggleCreateEventModal(true);
+    }
     
     render() {
+        const calendarsOwnedByUser = this.state.calendars.filter((calendar) => {
+            return calendar.ownedByUser;
+        });
+
         return (
-            <div>
+            <div className="main-content">
                 <Button bsStyle='primary' onClick={() => { this.toggleCreateEventModal(true) }}>
                     Create Event
                 </Button>
 
-                <AddEvent 
-                    isVisible={this.state.showCreateEventModal}
+                <CreateEventModal 
+                    isVisible={ this.state.showCreateEventModal }
                     hide={() => { this.toggleCreateEventModal(false) }}
-                    calendars={this.state.calendars} />
+                    calendars={ calendarsOwnedByUser }
+                    startTime={ this.state.createStartTime || null } 
+                    endTime={ this.state.createEndTime || null } />
 
                 <div className="main-content">
-                    <Calendar events={this.state.events} />
+                    <Calendar events={ this.state.events } rangeSelected={ this.calendarRangeSelected.bind(this) } />
                 </div>
             </div>
         );
