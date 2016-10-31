@@ -29,6 +29,8 @@ export default class CreateEventModal extends React.Component {
     }
 
     save() {
+        
+        
         this.props.hide();
     }
 
@@ -54,8 +56,6 @@ export default class CreateEventModal extends React.Component {
     endTimeChanged(newEndTime) {
         this.setState({ endTime: newEndTime });
     }
-
-    
 
     render() {
         const titleValidationState = () => {
@@ -96,7 +96,7 @@ export default class CreateEventModal extends React.Component {
                                 type="text"
                                 value={this.state.eventTitle}
                                 placeholder="Event title"
-                                onBlur={ () => { this.setState({ startedTypingTitle: true }) } }
+                                onBlur={ () => { this.setState({ startedTypingTitle: true }); } }
                                 onChange={this.eventTitleChanged.bind(this)} />
                             <FormControl.Feedback />
                         </FormGroup>

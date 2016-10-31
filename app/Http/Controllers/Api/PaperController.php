@@ -17,10 +17,10 @@ class PaperController extends Controller
         $responseData = new ApiResponseData();
         
         // Get all papers
-        $classMaterials = Paper::select(['name', 'code'])->get();
+        $papers = Paper::select(['name', 'code'])->get();
 
         // Add the papers to the response data object
-        $responseData->addData('class_materials', $classMaterials->toArray());
+        $responseData->addData('papers', $papers->toArray());
 
         // Return our response with our data
         return response()->json($responseData->get());

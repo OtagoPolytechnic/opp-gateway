@@ -35,7 +35,6 @@ class EventSeeder extends Seeder
                     'start_time' => $startTime,
                     'duration' => rand(1, 10) * 15,
                     'place' => 'D' . rand(1, 3) . rand(1, 15),
-                    'last_day_of_repetition' => $startTime,
                 ]);
             }
         }

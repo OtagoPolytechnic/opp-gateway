@@ -93,14 +93,4 @@ class User extends Authenticatable
         // Return all the events for this user
         return $query->get();
     }
-
-    /**
-     * Add an event to a calendar owned by this user
-     */
-    public function addEvent($calendar_id, $data)
-    {
-        $calendar = Calendar::findOrFail($calendar_id);
-
-        $calendar->addEvent($data);
-    }
 }

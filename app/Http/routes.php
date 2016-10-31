@@ -35,7 +35,7 @@ Route::group(['before' => 'api', 'namespace' => 'Api', 'middleware' => 'cors'], 
          * Calendar
          */
         Route::get('calendars/{calendar}/events', 'CalendarContoller@events');
-        Route::get('calendars/{calendar}/subscribers', 'CalendarContoller@subscribers');
+        Route::post('calendars/{calendar}/events', 'CalendarContoller@createEvent');
     });
 });
 

@@ -32,8 +32,13 @@ class Event extends Model
     public static function create(array $data = [])
     {
         // If the repetition_id is not empty, create the model instance normally
-        if (!empty($data['repetition_id']))
+        if (!empty($data['repetition_id'])) {
+            if (empty($data['last_day_of_repetition'])) {
+                $data['last_day_of_repetition'] = $data['start_time'];
+            }
+
             return parent::create($data);
+        }
         
         // If the repition_id is empty, set it to something and create the model instance
         $data['repetition_id'] = -1;
