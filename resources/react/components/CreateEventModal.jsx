@@ -29,8 +29,16 @@ export default class CreateEventModal extends React.Component {
     }
 
     save() {
-        
-        
+        const calendarId = 1;
+        axios.post('http://api.gateway.dev/v1/calendars/' + calendarId + '/events', {
+            name: this.state.eventTitle,
+            start_time: this.state.startTime,
+            duration: 1,
+            place: 'here'
+        }).then((response) => {
+            console.log(response);
+        });
+
         this.props.hide();
     }
 
