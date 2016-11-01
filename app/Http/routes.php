@@ -22,6 +22,12 @@ Route::group(['before' => 'api', 'namespace' => 'Api', 'middleware' => 'cors'], 
          * Papers
          */
         Route::get('papers', 'PaperController@all');
+        Route::get('papers/{paper}/instances', 'PaperController@instances');
+
+        /**
+         * Paper Instances
+         */
+        Route::get('paper-instances/{paperInstance}/resources', 'PaperInstanceController@resources');
 
         /**
          * Users
@@ -30,6 +36,34 @@ Route::group(['before' => 'api', 'namespace' => 'Api', 'middleware' => 'cors'], 
         Route::get('users/{user}/paper-instances', 'UserController@paperInstances');
         Route::get('users/{user}/calendars', 'UserController@calendars');
         Route::get('users/{user}/events', 'UserController@events');
+        Route::get('users/{user}/papers', 'UserController@papers');
+
+        /**
+         * Gradebooks
+         */
+        //Create a new gradebook(or return existing)
+        Route::post('gradebooks', 'GradebookController@create');
+
+        //Retrieve a particular Gradebook
+        Route::get('gradebooks/{gradebook}', 'GradebookController@retrieve');
+
+        /**
+         * Checkpoints
+         */
+        //Create a new checkpoint
+        Route::post('gradebooks/{gradebook}/checkpoints', 'CheckpointController@create');
+        //Get all the checkpoints for this gradebook
+        Route::get('gradebooks/{gradebook}/checkpoints', 'CheckpointController@retrieve');
+
+
+        /**
+         * Checkpoint_user (scores)
+         */
+        //Give a student a score
+        Route::post('scores/{checkpoint}', 'CheckpointUserController@createScore');
+        //Delete a student score
+        Route::delete('scores/{checkpoint}', 'CheckpointUserController@deleteScore');
+        Route::patch('scores/{checkpoint}', 'CheckpointUserController@patchScore');
 
         /**
          * Calendar

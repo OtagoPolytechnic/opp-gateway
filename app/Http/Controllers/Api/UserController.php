@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\PaperInstance;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponseData;
@@ -56,9 +57,6 @@ class UserController extends Controller
         return response()->json($responseData->get());
     }
 
-    /**
-     * Events in calendars this user subscribes to
-     */
     public function calendars(User $user)
     {
         // Make a new API Response Data object
@@ -78,4 +76,17 @@ class UserController extends Controller
         // Return our response with our data
         return response()->json($responseData->get());
     }
+
+    public function papers(User $user)
+    {
+        $responseData = new ApiResponseData();
+        $groups = $user->groups;
+        $paperInstances = $groups->map(function ($group){ return $group->paperInstance->paper;});
+
+        $responseData->addData('paper_instances', $paperInstances->toArray());
+
+        // Return our response with our data
+        return response()->json($responseData->get());
+    }
+
 }
