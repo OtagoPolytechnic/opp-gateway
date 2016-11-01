@@ -1,10 +1,6 @@
-// Imports
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import 'whatwg-fetch';
-
-// App component (has the navbar and menu, etc.)
 import App from './App';
 
 // Pages

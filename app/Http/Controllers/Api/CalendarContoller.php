@@ -24,7 +24,7 @@ class CalendarContoller extends Controller
         // Add the events to the response data object
         $responseData->addData('events', $events->toArray());
 
-        // Return our response with our data
+        // Return the ApiResponseData, with the events for this calendar, as JSON
         return response()->json($responseData->get());
     }
 
@@ -45,6 +45,9 @@ class CalendarContoller extends Controller
 
         $event = $calendar->events()->create($eventData);
 
-        return response()->json($event);
+        $responseData = new ApiResponseData();
+        $responseData->addData('new_event', $event);
+
+        return response()->json($responseData->get());
     }
 }

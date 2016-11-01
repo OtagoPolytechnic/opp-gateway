@@ -8,8 +8,8 @@ export default class CalendarPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'events': [],
-            'calendars': [],
+            events: [],
+            calendars: [],
             showCreateEventModal: false,
             createStartTime: null,
             createEndTime: null
@@ -80,7 +80,7 @@ export default class CalendarPage extends React.Component {
     }
     
     render() {
-        const calendarsOwnedByUser = this.state.calendars.filter((calendar) => {
+        const currentUsersCalendars = this.state.calendars.filter((calendar) => {
             return calendar.ownedByUser;
         });
 
@@ -93,13 +93,13 @@ export default class CalendarPage extends React.Component {
                 <CreateEventModal 
                     isVisible={ this.state.showCreateEventModal }
                     hide={() => { this.toggleCreateEventModal(false) }}
-                    calendars={ calendarsOwnedByUser }
+                    calendars={ currentUsersCalendars }
                     startTime={ this.state.createStartTime || null } 
                     endTime={ this.state.createEndTime || null } />
 
-                <div className="main-content">
-                    <Calendar events={ this.state.events } rangeSelected={ this.calendarRangeSelected.bind(this) } />
-                </div>
+                <Calendar
+                    events={ this.state.events }
+                    rangeSelected={ this.calendarRangeSelected.bind(this) } />
             </div>
         );
     }

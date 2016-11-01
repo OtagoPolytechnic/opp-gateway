@@ -17,7 +17,8 @@ export default class CreateEventModal extends React.Component {
             eventTitle: '',
             place: '',
             startTime: startTime,
-            endTime: endTime
+            endTime: endTime,
+            errors: '',
         };
     }
 
@@ -29,17 +30,28 @@ export default class CreateEventModal extends React.Component {
     }
 
     save() {
-        const calendarId = 1;
-        axios.post('http://api.gateway.dev/v1/calendars/' + calendarId + '/events', {
-            name: this.state.eventTitle,
-            start_time: this.state.startTime,
-            duration: 1,
-            place: 'here'
-        }).then((response) => {
-            console.log(response);
-        });
+        let errors = '';
 
-        this.props.hide();
+        if (true || this.state.eventTitle.length == 0) {
+            errors = 'Event title is required';
+        }
+
+        this.setState({ errors });
+
+        if (false && this.state.errors.length == 0) {
+            const calendarId = 1;
+            axios.post('http://api.gateway.dev/v1/calendars/' + calendarId + '/events', {
+                name: this.state.eventTitle,
+                start_time: this.state.startTime,
+                duration: 1,
+                place: 'here'
+            }).then((response) => {
+                console.log(response);
+            });
+
+            // this.props.eventCreated()
+            this.props.hide();
+        }
     }
 
     selectedCalendarChanged(e) {
@@ -65,6 +77,10 @@ export default class CreateEventModal extends React.Component {
         this.setState({ endTime: newEndTime });
     }
 
+    hideErrors() {
+        this.setState({ errors: '' });
+    }
+
     render() {
         const titleValidationState = () => {
             if (!this.state.startedTypingTitle) {
@@ -83,6 +99,12 @@ export default class CreateEventModal extends React.Component {
                 </Modal.Header>
 
                 <Modal.Body>
+                    {this.state.errors.length > 0 && 
+                        <div className='alert alert-danger'>
+                            { this.state.errors }
+                            <button onClick={this.hideErrors.bind(this)} type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                    }
                     <Form>
                         <FormGroup validationState='success'>
                             <ControlLabel>Calendar:</ControlLabel>

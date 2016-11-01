@@ -26,6 +26,18 @@ class UserController extends Controller
         return response()->json($responseData->get());
     }
 
+    public function paperInstances(User $user)
+    {
+        $responseData = new ApiResponseData();
+        $groups = $user->groups;
+
+        $paperInstances = $groups->map(function ($group){ return $group->paperInstance->paper; });
+        $responseData->addData('paper_instances', $paperInstances->toArray());
+        
+        // Return our response with our data
+        return response()->json($responseData->get());
+    }
+
     /**
      * Events in calendars this user subscribes to
      */

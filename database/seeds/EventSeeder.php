@@ -15,7 +15,7 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
-        // Clear the calendars table
+        // Clear the events table
         Event::truncate();
 
         // Define the number of events for each calendar
