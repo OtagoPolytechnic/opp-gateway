@@ -3,6 +3,7 @@ import { Form, Button, Modal, ControlLabel, FormControl, FormGroup, HelpBlock } 
 import * as axios from 'axios';
 import moment from 'moment';
 import DateTime from 'react-datetime';
+import Alert from './Alert';
 
 export default class CreateEventModal extends React.Component {
     constructor(props) {
@@ -18,7 +19,7 @@ export default class CreateEventModal extends React.Component {
             place: '',
             startTime: startTime,
             endTime: endTime,
-            errors: '',
+            errors: [],
         };
     }
 
@@ -30,15 +31,25 @@ export default class CreateEventModal extends React.Component {
     }
 
     save() {
-        let errors = '';
+        this.setState({ startedTypingTitle: true });
 
-        if (true || this.state.eventTitle.length == 0) {
-            errors = 'Event title is required';
+        let errors = [];
+
+        if (!this.titleIsValid()) {
+            errors.push('Event title is required');
         }
+
+        if (!this.endTimeIsValid()) {
+            errors.push('End time must be after start time');
+        }
+
+        console.log(errors);
 
         this.setState({ errors });
 
-        if (false && this.state.errors.length == 0) {
+        console.log(this.state.errors);
+
+        if (errors.length == 0) {
             const calendarId = 1;
             axios.post('http://api.gateway.dev/v1/calendars/' + calendarId + '/events', {
                 name: this.state.eventTitle,
@@ -81,13 +92,21 @@ export default class CreateEventModal extends React.Component {
         this.setState({ errors: '' });
     }
 
+    titleIsValid() {
+        return this.state.eventTitle.length > 0;
+    }
+
+    endTimeIsValid() {
+        return this.state.endTime.isAfter(this.state.startTime);
+    }
+
     render() {
         const titleValidationState = () => {
             if (!this.state.startedTypingTitle) {
                 return null;
             }
-
-            return this.state.eventTitle.length > 0 ? 'success' : 'error';
+            
+            return this.titleIsValid() ? 'success' : 'error';
         }
 
         return (
@@ -99,12 +118,13 @@ export default class CreateEventModal extends React.Component {
                 </Modal.Header>
 
                 <Modal.Body>
-                    {this.state.errors.length > 0 && 
-                        <div className='alert alert-danger'>
-                            { this.state.errors }
-                            <button onClick={this.hideErrors.bind(this)} type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
+                    { !!this.state.errors.length &&
+                        <Alert
+                            heading='Error'
+                            alertType='danger'
+                            message={this.state.errors} />
                     }
+
                     <Form>
                         <FormGroup validationState='success'>
                             <ControlLabel>Calendar:</ControlLabel>
@@ -153,7 +173,7 @@ export default class CreateEventModal extends React.Component {
                             <FormControl.Feedback />
                         </FormGroup>
 
-                        <FormGroup validationState={this.state.endTime.isAfter(this.state.startTime) > 0 ? 'success' : 'error'}>
+                        <FormGroup validationState={this.endTimeIsValid() ? 'success' : 'error'}>
                             <ControlLabel>End time:</ControlLabel>
                             <small className='pull-right'>required</small>
                             <DateTime
