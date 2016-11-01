@@ -29,6 +29,7 @@ Route::group(['before' => 'api', 'namespace' => 'Api', 'middleware' => 'cors'], 
          */
         Route::get('paper-instances/{paperInstance}/resources', 'PaperInstanceController@resources');
         Route::get('paper-instances/{paperInstance}/students', 'PaperInstanceController@students');
+        Route::get('paper-instances/{paperInstance}/lecturers', 'PaperInstanceController@lecturers');
 
         /**
          * Users

@@ -28,12 +28,28 @@ class PaperInstanceController extends Controller
 
     }
 
-    public function students(PaperInstance $paperInstance){
+    public function students(PaperInstance $paperInstance)
+    {
         // Make a new API Response Data object
         $responseData = new ApiResponseData();
 
         //Get all student groups and then all users in those groups
         $resourceData = $paperInstance->studentsGroups->map(function ($group){ return $group->users;});
+
+        //Add the students to the response data object
+        $responseData->addData('users', $resourceData->toArray());
+        
+        // Return our response with our data
+        return response()->json($responseData->get()); 
+    }
+
+    public function lecturers(PaperInstance $paperInstance)
+    {
+        // Make a new API Response Data object
+        $responseData = new ApiResponseData();
+
+        //Get all student groups and then all users in those groups
+        $resourceData = $paperInstance->lecturersGroup->users;
 
         //Add the students to the response data object
         $responseData->addData('users', $resourceData->toArray());
