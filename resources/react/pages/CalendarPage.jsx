@@ -1,6 +1,7 @@
 import React from 'react';
 import Calendar from '../components/Calendar';
 import CreateEventModal from '../components/CreateEventModal';
+import NewCalendarModal from '../components/NewCalendarModal';
 import axios from 'axios';
 import { Button, Row, Col } from 'react-bootstrap';
 
@@ -12,6 +13,7 @@ export default class CalendarPage extends React.Component {
             ownedCalendars: [],
             subscribedCalendars: [],
             showCreateEventModal: false,
+            showNewCalendarModal: false,
             createStartTime: null,
             createEndTime: null
         }
@@ -78,6 +80,10 @@ export default class CalendarPage extends React.Component {
         this.setState({ showCreateEventModal: visible });
     }
 
+    toggleNewCalendarModal(visible) {
+        this.setState({ showNewCalendarModal: visible });
+    }
+
     calendarRangeSelected(start, end) {
         this.setState({
             createStartTime: start,
@@ -111,7 +117,7 @@ export default class CalendarPage extends React.Component {
                                         })
                                     }
                                 </ul>
-                                <a onClick={ () => { alert('hi'); } }>+ New calendar</a>
+                                <a onClick={ () => this.toggleNewCalendarModal(true) }>+ New calendar</a>
                                 <hr />
                                 <h4>Subscribed to:</h4>
                                 <ul>
@@ -133,11 +139,15 @@ export default class CalendarPage extends React.Component {
                 </Row>
 
                 <CreateEventModal 
-                        isVisible={ this.state.showCreateEventModal }
-                        hide={() => { this.toggleCreateEventModal(false) }}
-                        calendars={ this.state.ownedCalendars }
-                        startTime={ this.state.createStartTime || null } 
-                        endTime={ this.state.createEndTime || null } />
+                    isVisible={ this.state.showCreateEventModal }
+                    hide={() => { this.toggleCreateEventModal(false) }}
+                    calendars={ this.state.ownedCalendars }
+                    startTime={ this.state.createStartTime || null } 
+                    endTime={ this.state.createEndTime || null } />
+
+                <NewCalendarModal 
+                    isVisible={ this.state.showNewCalendarModal }
+                    hide={() => { this.toggleNewCalendarModal(false) }} />
             </div>
         );
     }

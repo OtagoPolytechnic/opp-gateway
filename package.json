@@ -26,6 +26,7 @@
     "moment": "^2.15.2",
     "react": "^15.3.0",
     "react-bootstrap": "^0.30.5",
+    "react-color": "^2.4.0",
     "react-datetime": "^2.6.2",
     "react-dom": "^15.3.0",
     "react-gateway": "^2.3.0",

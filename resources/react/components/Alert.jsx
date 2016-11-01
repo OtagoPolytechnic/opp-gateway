@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Alert } from 'react-bootstrap';
+import { Alert as BootstrapAlert } from 'react-bootstrap';
 
-export default class CreateEventModal extends React.Component {
+export default class Alert extends React.Component {
 
     render() {
         const alertType = this.props.alertType || 'info';
@@ -11,7 +11,7 @@ export default class CreateEventModal extends React.Component {
         const messages = [].concat(this.props.message);
 
         return (
-            <Alert bsStyle={ alertType }>
+            <BootstrapAlert bsStyle={ alertType }>
                 { this.props.heading &&
                     <b>{ this.props.heading }</b>
                 }
@@ -20,7 +20,7 @@ export default class CreateEventModal extends React.Component {
                         return <div key={ index }>{ message }</div>
                     })
                 }
-            </Alert>
+            </BootstrapAlert>
         );
     }
 
