@@ -13,7 +13,6 @@
         
         <!-- FULL CALENDAR -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.0/fullcalendar.min.css">
-        <link rel="stylesheet" type="text/css" href="libcss/react-datetime.css">
         
         <!-- CUSTOM CSS -->
         <link rel="stylesheet" type="text/css" href="css/app.min.css">

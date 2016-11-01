@@ -61,7 +61,7 @@ function buildScript(watch) {
     return rebundle();
 }
 
-function sass() {
+gulp.task('sass', function() {
     return gulp.src(paths.sassFiles)
                .pipe(sass({ errLogToConsole: true }))
                .pipe(autoprefixer('last 2 versions', 'ie 9', 'ios 6', 'android 4'))
@@ -69,10 +69,6 @@ function sass() {
                .pipe(rename({ suffix: '.min' }))
                .pipe(minifycss())
                .pipe(gulp.dest(paths.cssDest));
-}
-
-gulp.task('sass', function() {
-    sass();
 });
 
 // run once

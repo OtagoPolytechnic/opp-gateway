@@ -1,4 +1,4 @@
-@import 'CSS:./node_modules/react-datetime/css/react-datetime.css';
+@import './node_modules/react-datetime/css/react-datetime';
 
 @import 'variables';
 @import 'typography';
@@ -24,10 +24,6 @@ a {
         width: 100%;
         margin-left: 0;
     }
-}
-
-.panel {
-    border-radius: 0;
 }
 
 .main-content {
