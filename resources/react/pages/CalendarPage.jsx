@@ -2,14 +2,15 @@ import React from 'react';
 import Calendar from '../components/Calendar';
 import CreateEventModal from '../components/CreateEventModal';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import { Button, Row, Col } from 'react-bootstrap';
 
 export default class CalendarPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             events: [],
-            calendars: [],
+            ownedCalendars: [],
+            subscribedCalendars: [],
             showCreateEventModal: false,
             createStartTime: null,
             createEndTime: null
@@ -50,19 +51,26 @@ export default class CalendarPage extends React.Component {
     fetchCalendars(userId) {
         axios.get('http://api.gateway.dev/v1/users/' + userId + '/calendars')
             .then((response) => {
-                let calendars = [];
+                let ownedCalendars = [];
+                let subscribedCalendars = [];
                 let data = response.data.data.calendars;
 
                 data.map((calendar) =>{
-                    calendars.push({
+                    let newCalendar = {
                         id: calendar.id,
                         name: calendar.name,
                         colour: calendar.colour,
                         ownedByUser: calendar.owned_by_user
-                    })
+                    }
+
+                    if (calendar.owned_by_user) {
+                        ownedCalendars.push(newCalendar);
+                    } else {
+                        subscribedCalendars.push(newCalendar);
+                    }
                 });
 
-                this.setState({ calendars });
+                this.setState({ ownedCalendars, subscribedCalendars });
              });
     }
 
@@ -80,26 +88,56 @@ export default class CalendarPage extends React.Component {
     }
     
     render() {
-        const currentUsersCalendars = this.state.calendars.filter((calendar) => {
-            return calendar.ownedByUser;
-        });
-
         return (
             <div className="main-content">
-                <Button bsStyle='primary' onClick={() => { this.toggleCreateEventModal(true) }}>
-                    Create Event
-                </Button>
+                <Row className='margin-top-15 margin-bottom-30'>
+                    <Col xs={12}>
+                        <Button bsStyle='primary' onClick={() => { this.toggleCreateEventModal(true) }}>
+                            Create Event
+                        </Button>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col md={4} lg={3}>
+                        <div className='panel panel-primary calendar-list'>
+                            <div className='panel-heading'>Calendars</div>
+                            <div className='panel-body'>
+                                <h4>Your calendars:</h4>
+                                <ul>
+                                    {
+                                        this.state.ownedCalendars.map((calendar, index) => {
+                                            return <li key={ index }>{ calendar.name }</li>
+                                        })
+                                    }
+                                </ul>
+                                <a onClick={ () => { alert('hi'); } }>+ New calendar</a>
+                                <hr />
+                                <h4>Subscribed to:</h4>
+                                <ul>
+                                    {
+                                        this.state.subscribedCalendars.map((calendar, index) => {
+                                            return <li key={ index }>{ calendar.name }</li>
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </Col>
+
+                    <Col md={8} lg={9}>
+                        <Calendar
+                            events={ this.state.events }
+                            rangeSelected={ this.calendarRangeSelected.bind(this) } />
+                    </Col>
+                </Row>
 
                 <CreateEventModal 
-                    isVisible={ this.state.showCreateEventModal }
-                    hide={() => { this.toggleCreateEventModal(false) }}
-                    calendars={ currentUsersCalendars }
-                    startTime={ this.state.createStartTime || null } 
-                    endTime={ this.state.createEndTime || null } />
-
-                <Calendar
-                    events={ this.state.events }
-                    rangeSelected={ this.calendarRangeSelected.bind(this) } />
+                        isVisible={ this.state.showCreateEventModal }
+                        hide={() => { this.toggleCreateEventModal(false) }}
+                        calendars={ this.state.ownedCalendars }
+                        startTime={ this.state.createStartTime || null } 
+                        endTime={ this.state.createEndTime || null } />
             </div>
         );
     }
