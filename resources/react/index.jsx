@@ -4,9 +4,9 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import App from './App';
 
 // Pages
-import HomePage from './Pages/HomePage';
-import CalendarPage from './Pages/CalendarPage';
-import MyPapersPage from './Pages/MyPapersPage';
+import HomePage from './pages/HomePage';
+import CalendarPage from './pages/CalendarPage';
+import MyPapersPage from './pages/MyPapersPage';
 
 ReactDOM.render(
     <Router history={browserHistory}>
