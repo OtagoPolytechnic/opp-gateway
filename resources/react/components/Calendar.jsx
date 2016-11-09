@@ -16,8 +16,6 @@ export default React.createClass({
     componentDidUpdate(prevProps, prevState) {
         const { calendar } = this.refs;
 
-        console.log(this.props.events);
-
         $(calendar).fullCalendar('destroy');
 
         $(calendar).fullCalendar({

@@ -35,6 +35,7 @@ Route::group(['before' => 'api', 'namespace' => 'Api', 'middleware' => 'cors'], 
         Route::get('users', 'UserController@all');
         Route::get('users/{user}/paper-instances', 'UserController@paperInstances');
         Route::get('users/{user}/calendars', 'UserController@calendars');
+        Route::post('users/{user}/calendars', 'CalendarContoller@create');
         Route::get('users/{user}/events', 'UserController@events');
         Route::get('users/{user}/papers', 'UserController@papers');
 

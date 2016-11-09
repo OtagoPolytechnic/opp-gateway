@@ -94,6 +94,10 @@ export default class CalendarPage extends React.Component {
     eventCreated() {
         this.fetchEvents(1);
     }
+
+    calendarCreated() {
+        this.fetchCalendars(1);
+    }
     
     render() {
         return (
@@ -143,13 +147,14 @@ export default class CalendarPage extends React.Component {
                 <CreateEventModal 
                     isVisible={ this.state.showCreateEventModal }
                     hide={() => { this.toggleCreateEventModal(false) }}
-                    eventCreated={this.eventCreated.bind(this)}
+                    eventCreated={ this.eventCreated.bind(this) }
                     calendars={ this.state.ownedCalendars }
                     startTime={ this.state.createStartTime || null } 
                     endTime={ this.state.createEndTime || null } />
 
                 <NewCalendarModal 
                     isVisible={ this.state.showNewCalendarModal }
+                    calendarCreated={ this.calendarCreated.bind(this) }
                     hide={() => { this.toggleNewCalendarModal(false) }} />
             </div>
         );

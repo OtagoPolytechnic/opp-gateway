@@ -17,7 +17,31 @@ export default class NewCalendarModal extends React.Component {
     }
 
     save() {
-        this.props.hide();
+        this.setState({ startedTypingTitle: true });
+
+        let errors = [];
+
+        if (!this.nameIsValid()) {
+            errors.push('Calendar name is required');
+        }
+
+        if (!this.colourIsValid()) {
+            errors.push('Colour must be a legal HEX colour');
+        }
+
+        this.setState({ errors });
+
+        if (errors.length == 0) {
+            const userId = 1;
+            
+            axios.post('http://api.gateway.dev/v1/users/' + userId + '/calendars', {
+                name: this.state.name,
+                colour: this.state.colour
+            }).then((response) => {
+                this.props.calendarCreated();
+                this.props.hide();
+            });
+        }
     }
 
     nameChanged(e) {
@@ -40,7 +64,7 @@ export default class NewCalendarModal extends React.Component {
     }
 
     render() {
-        const titleValidationState = () => {
+        const nameValidationState = () => {
             if (!this.state.validateName) {
                 return null;
             }
@@ -65,7 +89,7 @@ export default class NewCalendarModal extends React.Component {
                     }
 
                     <Form>
-                        <FormGroup validationState={ titleValidationState() }>
+                        <FormGroup validationState={ nameValidationState() }>
                             <ControlLabel>Name:</ControlLabel>
                             <small className='pull-right'>required</small>
                             <FormControl

@@ -6,13 +6,35 @@ use Illuminate\Http\Request;
 
 use Auth;
 use App\Calendar;
+use App\User;
 use App\Http\Requests;
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\CalendarRequest;
 use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponseData;
 
 class CalendarContoller extends Controller
 {
+    public function create(User $user, CalendarRequest $request)
+    {
+        $postData = $request->all();
+
+        $calendarData = [
+            'owner_id' => $user->id,
+            'name' => $postData['name'],
+            'colour' => $postData['colour'],
+        ];
+
+        $newCalendar = Calendar::create($calendarData);
+
+        dd($newCalendar);
+
+        $responseData = new ApiResponseData();
+        $responseData->addData('new_calendar', $newCalendar);
+
+        return response()->json($responseData->get());
+    }
+
     public function events(Calendar $calendar)
     {
         // Make a new API Response Data object
@@ -30,7 +52,6 @@ class CalendarContoller extends Controller
 
     public function createEvent(Calendar $calendar, EventRequest $request)
     {
-        $user = Auth::user();
         $postData = $request->all();
 
         $eventData = [
