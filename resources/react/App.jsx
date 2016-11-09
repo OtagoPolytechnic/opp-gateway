@@ -57,7 +57,7 @@ export default React.createClass({
                                 </a>
                             </li>
                             <li>
-                                <a href="https://google.com">
+                                <a href="http://cico.op-bit.nz">
                                     <i className="fa fa-barcode" aria-hidden="true"></i> CICO
                                 </a>
                             </li>
