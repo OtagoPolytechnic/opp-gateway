@@ -4,6 +4,7 @@ import CreateEventModal from '../components/CreateEventModal';
 import NewCalendarModal from '../components/NewCalendarModal';
 import axios from 'axios';
 import { Button, Row, Col } from 'react-bootstrap';
+import { env } from '../env';
 
 export default class CalendarPage extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export default class CalendarPage extends React.Component {
     }
 
     fetchEvents(userId) {
-        axios.get('http://api.gateway.dev/v1/users/' + userId + '/events').then((response) => {
+        axios.get(env.apiOrigin + '/v1/users/' + userId + '/events').then((response) => {
             let events = [];
             let data = response.data.data.events;
 
@@ -50,7 +51,7 @@ export default class CalendarPage extends React.Component {
     }
 
     fetchCalendars(userId) {
-        axios.get('http://api.gateway.dev/v1/users/' + userId + '/calendars').then((response) => {
+        axios.get(env.apiOrigin + '/v1/users/' + userId + '/calendars').then((response) => {
             let ownedCalendars = [];
             let subscribedCalendars = [];
             let data = response.data.data.calendars;

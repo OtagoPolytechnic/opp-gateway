@@ -3,6 +3,7 @@ import { Form, Button, Modal, ControlLabel, FormControl, FormGroup, HelpBlock, I
 import * as axios from 'axios';
 import Alert from './Alert';
 import { GithubPicker } from 'react-color';
+import { env } from '../env';
 
 export default class NewCalendarModal extends React.Component {
     constructor(props) {
@@ -34,7 +35,7 @@ export default class NewCalendarModal extends React.Component {
         if (errors.length == 0) {
             const userId = 1;
             
-            axios.post('http://api.gateway.dev/v1/users/' + userId + '/calendars', {
+            axios.post(env.apiOrigin + '/v1/users/' + userId + '/calendars', {
                 name: this.state.name,
                 colour: this.state.colour
             }).then((response) => {

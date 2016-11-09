@@ -4,6 +4,7 @@ import * as axios from 'axios';
 import moment from 'moment';
 import DateTime from 'react-datetime';
 import Alert from './Alert';
+import { env } from '../env';
 
 export default class CreateEventModal extends React.Component {
     constructor(props) {
@@ -47,8 +48,8 @@ export default class CreateEventModal extends React.Component {
 
         if (errors.length == 0) {
             const calendarId = 1;
-            
-            axios.post('http://api.gateway.dev/v1/calendars/' + calendarId + '/events', {
+
+            axios.post(env.apiOrigin + '/v1/calendars/' + calendarId + '/events', {
                 name: this.state.eventTitle,
                 start_time: this.state.startTime,
                 duration: 1,
