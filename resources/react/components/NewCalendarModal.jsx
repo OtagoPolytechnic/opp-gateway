@@ -92,7 +92,7 @@ export default class NewCalendarModal extends React.Component {
                         </FormGroup>
                         <GithubPicker
                             color={ this.state.colour }
-                            onChangeComplete={ (colour) => { this.setState({ colour: colour.hex.slice(1) }); console.log(colour.hex) } } />
+                            onChangeComplete={ (colour) => { this.setState({ colour: colour.hex.slice(1) }); } } />
                     </Form>
                 </Modal.Body>
 

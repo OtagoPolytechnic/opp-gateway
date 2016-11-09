@@ -13,8 +13,12 @@ export default React.createClass({
         $(calendar).fullCalendar('destroy');
     },
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         const { calendar } = this.refs;
+
+        console.log(this.props.events);
+
+        $(calendar).fullCalendar('destroy');
 
         $(calendar).fullCalendar({
             header: {

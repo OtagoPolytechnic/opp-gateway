@@ -25,55 +25,53 @@ export default class CalendarPage extends React.Component {
     }
 
     fetchEvents(userId) {
-        axios.get('http://api.gateway.dev/v1/users/' + userId + '/events')
-            .then((response) => {
-                let events = [];
-                let data = response.data.data.events;
+        axios.get('http://api.gateway.dev/v1/users/' + userId + '/events').then((response) => {
+            let events = [];
+            let data = response.data.data.events;
 
-                data.map((event) =>
-                {
-                    let start = new moment(event['start_time']);
-                    let duration = event['duration'];
-                    let end = start.add(duration, 'minutes');
+            data.map((event) =>
+            {
+                let start = new moment(event['start_time']);
+                let duration = event['duration'];
+                let end = start.add(duration, 'minutes');
 
-                    events.push(
-                        {
-                            title: event['event_name'],
-                            start: start.toDate(),
-                            end: end.toDate(),
-                            color: '#' + event['colour']
-                        }
-                    )
-                });
+                events.push(
+                    {
+                        title: event['event_name'],
+                        start: start.toDate(),
+                        end: end.toDate(),
+                        color: '#' + event['colour']
+                    }
+                )
+            });
 
-                this.setState({ events });
-             });
+            this.setState({ events });
+        });
     }
 
     fetchCalendars(userId) {
-        axios.get('http://api.gateway.dev/v1/users/' + userId + '/calendars')
-            .then((response) => {
-                let ownedCalendars = [];
-                let subscribedCalendars = [];
-                let data = response.data.data.calendars;
+        axios.get('http://api.gateway.dev/v1/users/' + userId + '/calendars').then((response) => {
+            let ownedCalendars = [];
+            let subscribedCalendars = [];
+            let data = response.data.data.calendars;
 
-                data.map((calendar) =>{
-                    let newCalendar = {
-                        id: calendar.id,
-                        name: calendar.name,
-                        colour: calendar.colour,
-                        ownedByUser: calendar.owned_by_user
-                    }
+            data.map((calendar) =>{
+                let newCalendar = {
+                    id: calendar.id,
+                    name: calendar.name,
+                    colour: calendar.colour,
+                    ownedByUser: calendar.owned_by_user
+                }
 
-                    if (calendar.owned_by_user) {
-                        ownedCalendars.push(newCalendar);
-                    } else {
-                        subscribedCalendars.push(newCalendar);
-                    }
-                });
+                if (calendar.owned_by_user) {
+                    ownedCalendars.push(newCalendar);
+                } else {
+                    subscribedCalendars.push(newCalendar);
+                }
+            });
 
-                this.setState({ ownedCalendars, subscribedCalendars });
-             });
+        this.setState({ ownedCalendars, subscribedCalendars });
+        });
     }
 
     toggleCreateEventModal(visible) {
@@ -92,20 +90,24 @@ export default class CalendarPage extends React.Component {
 
         this.toggleCreateEventModal(true);
     }
+
+    eventCreated() {
+        this.fetchEvents(1);
+    }
     
     render() {
         return (
             <div className="main-content">
-                <Row className='margin-top-15 margin-bottom-30'>
-                    <Col xs={12}>
-                        <Button bsStyle='primary' onClick={() => { this.toggleCreateEventModal(true) }}>
-                            Create Event
-                        </Button>
-                    </Col>
-                </Row>
-
                 <Row>
                     <Col md={4} lg={3}>
+                        <Button
+                            bsStyle='primary'
+                            block={ true }
+                            className='margin-bottom-30' 
+                            onClick={() => { this.toggleCreateEventModal(true) }}>
+                            Create Event
+                        </Button>
+
                         <div className='panel panel-primary calendar-list'>
                             <div className='panel-heading'>Calendars</div>
                             <div className='panel-body'>
@@ -141,6 +143,7 @@ export default class CalendarPage extends React.Component {
                 <CreateEventModal 
                     isVisible={ this.state.showCreateEventModal }
                     hide={() => { this.toggleCreateEventModal(false) }}
+                    eventCreated={this.eventCreated.bind(this)}
                     calendars={ this.state.ownedCalendars }
                     startTime={ this.state.createStartTime || null } 
                     endTime={ this.state.createEndTime || null } />

@@ -43,25 +43,20 @@ export default class CreateEventModal extends React.Component {
             errors.push('End time must be after start time');
         }
 
-        console.log(errors);
-
         this.setState({ errors });
-
-        console.log(this.state.errors);
 
         if (errors.length == 0) {
             const calendarId = 1;
+            
             axios.post('http://api.gateway.dev/v1/calendars/' + calendarId + '/events', {
                 name: this.state.eventTitle,
                 start_time: this.state.startTime,
                 duration: 1,
                 place: 'here'
             }).then((response) => {
-                console.log(response);
+                this.props.eventCreated()
+                this.props.hide();
             });
-
-            // this.props.eventCreated()
-            this.props.hide();
         }
     }
 
