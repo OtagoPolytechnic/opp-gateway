@@ -11,8 +11,6 @@ export default class Calendar extends React.Component {
 
     componentWillUnmount() {
         const { calendar } = this.refs;
-
-        $(calendar).fullCalendar('destroy');
     }
 
     componentDidUpdate(prevProps, prevState) {
