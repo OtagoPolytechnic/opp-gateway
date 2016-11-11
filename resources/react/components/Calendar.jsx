@@ -1,17 +1,19 @@
 import React, { PropTypes } from 'react';
 
-export default React.createClass({
-    getInitialState() {
-        return {
-            'events': []
-        };
-    },
+export default class Calendar extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            events: []
+        }
+    }
 
     componentWillUnmount() {
         const { calendar } = this.refs;
 
         $(calendar).fullCalendar('destroy');
-    },
+    }
 
     componentDidUpdate(prevProps, prevState) {
         const { calendar } = this.refs;
@@ -28,13 +30,13 @@ export default React.createClass({
             selectable: true,
             select: this.props.rangeSelected
         });
-    },
+    }
 
-    render(){
+    render() {
         return (
             <div>
                 <div ref='calendar'></div>
             </div>
         );
     }
-});
+}

@@ -23,5 +23,4 @@ export default class Alert extends React.Component {
             </BootstrapAlert>
         );
     }
-
 }
