@@ -9,10 +9,6 @@ export default class Calendar extends React.Component {
         }
     }
 
-    componentWillUnmount() {
-        const { calendar } = this.refs;
-    }
-
     componentDidUpdate(prevProps, prevState) {
         const { calendar } = this.refs;
 
